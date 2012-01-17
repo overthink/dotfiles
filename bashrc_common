@@ -1,0 +1,16 @@
+# Stuff I normally add to my .bashrc
+# vim: ft=sh
+set -o vi
+
+export EDITOR="vim"
+export JAVA_HOME="/usr/lib/jvm/java-6-sun"
+export M2_HOME="/usr/local/maven"
+#export MAVEN_OPTS="-Xmx512m -XX:MaxPermSize=128m -noverify -javaagent:/usr/local/jrebel/jrebel.jar"
+export ANT_HOME="/usr/local/ant"
+export SCALA_HOME="/usr/local/scala"
+export CLOJURE_EXT=~/.clojure
+export CLOJURE_OPTS="-Xmx128m -server"
+#export CLOJURE_MAIN="clojure.contrib.repl_ln"
+
+PATH="$PATH:$JAVA_HOME/bin:$M2_HOME/bin:$ANT_HOME/bin:$SCALA_HOME/bin"
+

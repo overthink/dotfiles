@@ -1,0 +1,6 @@
+Turn on within GNOME:
+gconftool-2 -s /desktop/gnome/session/required_components/windowmanager xmonad --type string
+
+Back to normal: 
+gconftool-2 -s /desktop/gnome/session/required_components/windowmanager metacity --type string
+

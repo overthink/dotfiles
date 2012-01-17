@@ -1,0 +1,6 @@
+#!/bin/sh
+
+ctags -R -f jdk_tags $JAVA_HOME/src
+ctags -R -f scala_tags $SCALA_HOME/src
+ctags -R -f lift_tags lift
+
