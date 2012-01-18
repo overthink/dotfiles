@@ -1,0 +1,43 @@
+#!/bin/bash
+# Generate a .gitconfig and write it on stdout.
+
+
+echo -n "Enter name: "
+read name
+echo -n "Enter email: "
+read email
+
+# Generate .gitconfig
+OUTFILE="$HOME/.gitconfig"
+cat > $OUTFILE <<EOF
+[user]
+	name = $name
+	email = $email
+[color]
+	ui = true
+
+EOF
+echo "Wrote $OUTFILE"
+
+
+# Generate .hgrc file
+OUTFILE="$HOME/.hgrc"
+cat > $OUTFILE <<EOF
+[ui]
+username = $name <$email>
+
+[extensions]
+hgext.extdiff =
+hgext.graphlog =
+color=
+
+[extdiff]
+cmd.cdiff = colordiff
+cmd.vdiff = kdiff3
+
+[defaults]
+cdiff = -q
+
+EOF
+echo "Wrote $OUTFILE"
+
