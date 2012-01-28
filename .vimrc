@@ -2,8 +2,9 @@
 """" c:\path\to\vim\gvim.exe -c "simalt ~x" "%1"
 call pathogen#infect()
 call pathogen#helptags()
-set bg=dark
+filetype plugin indent on
 set nocompatible                  " this enables lots of good stuff
+set bg=dark
 set encoding=utf-8                " encoding is used for display purposes
 set noerrorbells                  " shut up!
 set ignorecase                    " ignore case when searching.  Prefix search with \c to match case
