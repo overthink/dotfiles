@@ -15,17 +15,22 @@ myManageHook = composeAll
     ]
 
 myLayout = layoutHook gnomeConfig
+--
+-- Make caps lock key trigger 'mod3' rather than useless caps lock.
+-- Create .Xmodmap:
+--
+-- remove Lock = Caps_Lock
+-- clear mod3
+-- add mod3 = Caps_Lock
 
 main = xmonad gnomeConfig
-        { modMask = mod4Mask -- use super/windows key instead of alt
+        { modMask = mod3Mask -- use mod3; idea is make caps lock trigger mod3
         , workspaces = myWorkspaces
         , manageHook = myManageHook <+> manageHook gnomeConfig
         , startupHook = ewmhDesktopsStartup >> setWMName "LG3D" -- fix for Java apps
         -- , layoutHook = showWName myLayout
         , logHook = takeTopFocus
         }
-
-
 
 -- Machinery to fix Java focus issue: http://permalink.gmane.org/gmane.comp.lang.haskell.xmonad/10693
 -- This is supposed to be in xmonadcontirb, but not in Ubuntu 10.04...
