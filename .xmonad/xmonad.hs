@@ -22,6 +22,8 @@ myLayout = layoutHook gnomeConfig
 -- remove Lock = Caps_Lock
 -- clear mod3
 -- add mod3 = Caps_Lock
+-- 
+-- use setxkbmap to reset thing if you f up
 
 main = xmonad gnomeConfig
         { modMask = mod3Mask -- use mod3; idea is make caps lock trigger mod3
