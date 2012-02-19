@@ -26,7 +26,7 @@ myLayout = layoutHook gnomeConfig
 -- use setxkbmap to reset thing if you f up
 
 main = xmonad gnomeConfig
-        { modMask = mod3Mask -- use mod3; idea is make caps lock trigger mod3
+        { modMask = mod4Mask -- left windows key (then make caps lock act as windows key with xmodmap)
         , workspaces = myWorkspaces
         , manageHook = myManageHook <+> manageHook gnomeConfig
         , startupHook = ewmhDesktopsStartup >> setWMName "LG3D" -- fix for Java apps
