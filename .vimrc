@@ -17,7 +17,6 @@ set autoindent
 set history=256                   " keep lots of history of commands
 set nobackup                      " I'm tired of all these backup files...
 set expandtab                     " I'm also tired of screwed up tabstops, so no more tab -- spaces instead
-set guioptions+=b                 " add a bottom scrollbar
 syntax enable                     " use syntax hilighting
 if !has("gui_running")
   " use this scheme in text vim
@@ -47,10 +46,18 @@ set laststatus=2           " Always show status bar
 set statusline=%<%f\ %y[%{&ff}]%m%r%w%a\ %=%l/%L,%c%V\ %P  " cooler status line
 set nosol                  " don't jump to the start of the line on a bunch of different movement commands
 set complete=.,w,b,u,U,i,d,k,t  " Better auto completion, full tags last
-set guioptions-=tT         " Don't show the toolbar icons or those damn tear-off menus
+set guioptions-=t         " No tear-off menus
+set guioptions-=T         " No toolbar
+set guioptions-=m         " No top menu
+set guioptions-=r         " No right scrollbar
+set guioptions-=R         " No right scrollbar in splits
+set guioptions-=l         " No left srollbar
+set guioptions-=L         " No left srollbar in vertical splits
+set guioptions-=b         " No bottom scrollbar
 set grepprg=grep\ -EHns    " (E-extended regex, H-print file names, n-print line numbers, s-supress error messages) See: http://unxutils.sourceforge.net/
 set viminfo='20,\"50,:256
 set tags=./tags,tags,~/dev/jdk_tags,~/dev/scala_tags,~/dev/lift_tags,~/dev/poc/tags
+set autochdir              " change working dir to be the location of the current file
 
 if has("unix")
   set shellcmdflag=-ic
