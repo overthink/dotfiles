@@ -201,3 +201,6 @@ nmap <Space> :noh<CR>
 let vimclojure#HighlightBuiltins = 1
 "let vimclojure#WantNailgun = 1
 
+" Not sure why 'filetype plugin indent on' doesn't get this right
+autocmd Filetype python setlocal ts=4 sw=4 sts=4
+
