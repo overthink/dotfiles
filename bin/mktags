@@ -1,6 +1,4 @@
-#!/bin/sh
-
-ctags -R -f jdk_tags $JAVA_HOME/src
-ctags -R -f scala_tags $SCALA_HOME/src
-ctags -R -f lift_tags lift
+#!/bin/bash
+# Make tags file recursively from current director
+ctags -R --fields=+iaS --extra=+q .
 
