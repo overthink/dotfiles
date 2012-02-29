@@ -59,11 +59,6 @@ set viminfo='20,\"50,:256
 set tags=./tags;/         " tags=.tags;/ <-- searches parent dirs for tags files
 set tags+=~/dev/jdk_tags,~/dev/scala_tags,~/dev/lift_tags  
 set autochdir             " change working dir to be the location of the current file
-"set mouse=a               " enable the mouse all the time (i.e. even in console mode)
-
-if has("unix")
-  set shellcmdflag=-ic
-endif
 
 let mapleader = ","
 
