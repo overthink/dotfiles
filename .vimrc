@@ -35,7 +35,7 @@ set tabstop=2              " number of spaces that a <Tab> in the file counts fo
 set shiftwidth=2           " number of spaces to use for each step of autoindent
 set hidden                 " allow switching buffers even if not saved
 set showmatch              " match parentheses as you type them
-set foldmethod=manual      " I like to define my own folds usually
+set foldmethod=syntax
 set foldlevelstart=99      " start with folds all open (99 levels anyway)
 "set listchars=tab:»·,trail:·,extends:…  " make the hidden characters look nicer
 "set list                 " show normally hidden characters
