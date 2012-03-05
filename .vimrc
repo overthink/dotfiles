@@ -203,3 +203,9 @@ let vimclojure#WantNailgun = 1
 " Not sure why 'filetype plugin indent on' doesn't get this right
 autocmd Filetype python setlocal ts=4 sw=4 sts=4
 
+autocmd Filetype scala setlocal foldmethod=indent
+
+let g:SuperTabMappingForward = '<c-space>'
+let g:SuperTabMappingBackward = '<s-c-space>'
+let g:SuperTabDefaultCompletionType = "context"
+
