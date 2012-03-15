@@ -12,7 +12,7 @@ set smartcase                     " When search contains a capital letter, becom
 set backspace=indent,eol,start    " allow backspacing over everything in INS mode
 set whichwrap=<,>,[,],h,l,b,s,~   " Make end/beginning-of-line cursor wrapping behave human-like, not vi-like
 set wrap                          " use wrapping
-set showbreak=---------->         " but emphasize when it occurs
+"set showbreak=---------->         " but emphasize when it occurs
 set autoindent
 set history=256                   " keep lots of history of commands
 set nobackup                      " I'm tired of all these backup files...
@@ -38,7 +38,7 @@ set showmatch              " match parentheses as you type them
 set foldmethod=syntax
 set foldlevelstart=99      " start with folds all open (99 levels anyway)
 "set listchars=tab:»·,trail:·,extends:…  " make the hidden characters look nicer
-"set list                 " show normally hidden characters
+set list                   " show normally hidden characters
 hi SpecialKey guifg=darkgray  " make the listchars characters show up dark gray
 set wildmenu               " Wild!  This thing kicks ass.
 set wildmode=longest,full  " First match only to the longest common string, then use full/wildmenu match
@@ -180,8 +180,10 @@ function! <SID>DecrFoldLevel()
     endif
 endfunction
 
-" Hit <CR> to highlight the current word without moving the screen.  n/N works
-" to jump between matches. http://vim.wikia.com/wiki/Highlight_all_search_pattern_matches
+" Hit <s-CR> (used to use <CR>, but screws up use of quickfix window) to
+" highlight the current word without moving the screen.  n/N works to jump
+" between matches.
+" http://vim.wikia.com/wiki/Highlight_all_search_pattern_matches
 let g:highlighting = 0
 function! Highlighting()
   if g:highlighting == 1 && @/ =~ '^\\<'.expand('<cword>').'\\>$'
@@ -192,7 +194,7 @@ function! Highlighting()
   let g:highlighting = 1
   return ":silent set hlsearch\<CR>"
 endfunction
-nnoremap <silent> <expr> <CR> Highlighting()
+nnoremap <silent> <expr> <s-CR> Highlighting()
 
 " Hit space to remove highlighting
 nmap <Space> :noh<CR>
@@ -207,5 +209,5 @@ autocmd Filetype scala setlocal foldmethod=indent
 
 let g:SuperTabMappingForward = '<c-space>'
 let g:SuperTabMappingBackward = '<s-c-space>'
-let g:SuperTabDefaultCompletionType = "context"
+let g:SuperTabDefaultCompletionType = 'context'
 

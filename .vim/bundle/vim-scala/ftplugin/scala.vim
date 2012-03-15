@@ -3,7 +3,7 @@ setlocal textwidth=80
 setlocal shiftwidth=2
 setlocal softtabstop=2
 setlocal expandtab
-setlocal formatoptions=tcqr
+setlocal formatoptions=cqr
 
 "
 " FuzzyFinder stuff
@@ -42,9 +42,9 @@ function! scala#GetDirForFuzzyFinder(from, addon)
         let found = from . '/' . addon
     else
         let dirs = split(from, '/')
-		if !has('win32') && !has('win64')
-			let dirs[0] = '/' . dirs[0]
-		endif
+        if !has('win32') && !has('win64')
+          let dirs[0] = '/' . dirs[0]
+        endif
         " Walk up the tree and see if it's anywhere there
         for n in range(len(dirs) - 1, 0, -1)
             let path = join(dirs[0:n], '/')
