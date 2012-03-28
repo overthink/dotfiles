@@ -42,6 +42,7 @@ set list                   " show normally hidden characters
 hi SpecialKey guifg=darkgray  " make the listchars characters show up dark gray
 set wildmenu               " Wild!  This thing kicks ass.
 set wildmode=longest,full  " First match only to the longest common string, then use full/wildmenu match
+set wildignore=*.o,*.pyc,*.class
 set laststatus=2           " Always show status bar
 set statusline=%<%f\ %y[%{&ff}]%m%r%w%a\ %=%l/%L,%c%V\ %P  " cooler status line
 set nosol                  " don't jump to the start of the line on a bunch of different movement commands
