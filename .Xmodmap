@@ -1,4 +1,5 @@
 ! disable caps lock function and make caps lock key emit left windows key symbol (for xmonad)
+! use: setxkbmap to fix the world when you break it with this.
 clear lock
 keysym Caps_Lock = Super_L
 
