@@ -69,6 +69,9 @@ let mapleader = ","
 " Mappings
 "##############################################################################
 
+" Alt-] to open a tag in a new split
+map <A-]> :sp <CR>:exec("tag ".expand("<cword>"))<CR>
+
 " set some mappings to easly cycle through buffers
 noremap <C-Tab> :bnext<CR>
 inoremap <C-Tab> <Esc>:bnext<CR>
