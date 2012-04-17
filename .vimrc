@@ -38,7 +38,7 @@ set showmatch              " match parentheses as you type them
 set foldmethod=syntax
 set foldlevelstart=99      " start with folds all open (99 levels anyway)
 "set listchars=tab:»·,trail:·,extends:…  " make the hidden characters look nicer
-set list                   " show normally hidden characters
+set nolist                   " show normally hidden characters
 hi SpecialKey guifg=darkgray  " make the listchars characters show up dark gray
 set wildmenu               " Wild!  This thing kicks ass.
 set wildmode=longest,full  " First match only to the longest common string, then use full/wildmenu match
@@ -214,4 +214,27 @@ autocmd Filetype scala setlocal foldmethod=indent
 let g:SuperTabMappingForward = '<c-space>'
 let g:SuperTabMappingBackward = '<s-c-space>'
 let g:SuperTabDefaultCompletionType = 'context'
+
+" Run a shell command and put the output in a scratch buffer.
+" http://vim.wikia.com/wiki/Display_output_of_shell_commands_in_new_window
+" e.g :R hg annotate %
+command! -complete=shellcmd -nargs=+ R call s:RunShellCommand(<q-args>)
+function! s:RunShellCommand(cmdline)
+  echo a:cmdline
+  let expanded_cmdline = a:cmdline
+  for part in split(a:cmdline, ' ')
+     if part[0] =~ '\v[%#<]'
+        let expanded_part = fnameescape(expand(part))
+        let expanded_cmdline = substitute(expanded_cmdline, part, expanded_part, '')
+     endif
+  endfor
+  botright new
+  setlocal buftype=nofile bufhidden=wipe nobuflisted noswapfile nowrap
+  call setline(1, 'You entered:    ' . a:cmdline)
+  call setline(2, 'Expanded Form:  ' .expanded_cmdline)
+  call setline(3,substitute(getline(2),'.','=','g'))
+  execute '$read !'. expanded_cmdline
+  setlocal nomodifiable
+  1
+endfunction
 
