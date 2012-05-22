@@ -6,7 +6,7 @@ Config { font = "-misc-fixed-*-*-*-*-13-*-*-*-*-*-*-*"
                     , Run Cpu ["-L","15","-H","50","--normal","green","--high","red"] 10
                     , Run Memory ["-t","Mem: %"] 10
                     , Run Swap [] 10
-                    , Run Date "%a %b %_d %Y %H:%M:%S" "date" 10
+                    , Run Date "%a %b %_d %Y %I:%M:%S %p" "date" 10
                     , Run StdinReader
                     ]
        , sepChar = "%"

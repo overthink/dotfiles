@@ -7,16 +7,16 @@ trayer --edge top --align right --SetDockType true --SetPartialStrut true --expa
 #gnome-screensaver
 #gnome-settings-daemon
 
-if [ -x /usr/bin/gnome-power-manager ] ; then
-   sleep 1
-   gnome-power-manager
-fi
-
 if [ -x /usr/bin/nm-applet ] ; then
    nm-applet --sm-disable &
 fi
 
+# Set a background image
 feh --bg-scale /home/mark/Pictures/opeth-forest.jpg
+
+eval $(gnome-keyring-daemon --start)
+export GNOME_KEYRING_SOCKET
+export GNOME_KEYRING_PID
 
 exec xmonad
 
