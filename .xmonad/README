@@ -1,0 +1,7 @@
+Leave `xmonad.hs` in ~/.xmonad.
+
+`xmonad.start should` go in /usr/bin
+`xmonad-mark.desktop` should go in /usr/share/xsessions
+
+Just use symlinks.
+
