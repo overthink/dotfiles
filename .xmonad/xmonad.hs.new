@@ -26,5 +26,6 @@ main = do
                         }
         , modMask = mod4Mask     -- Rebind Mod to the Windows key
         , workspaces = myWorkspaces
-        }
+        } `additionalKeys`
+        [ ((mod4Mask .|. shiftMask, xK_l), spawn "gnome-screensaver-command --lock") ]
 
