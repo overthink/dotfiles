@@ -31,7 +31,11 @@ username = $name <$email>
 [extensions]
 hgext.extdiff =
 hgext.graphlog =
-color=
+color =
+rebase =
+
+[diff]
+git = 1
 
 [extdiff]
 cmd.cdiff = colordiff
