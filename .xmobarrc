@@ -1,7 +1,7 @@
-Config { font = "-misc-fixed-*-*-*-*-13-*-*-*-*-*-*-*"
-       , bgColor = "black"
+Config { font = "xft:DejaVu Sans Mono-9"
+       , bgColor = "#333333"
        , fgColor = "grey"
-       , position = TopW L 85
+       , position = TopW L 90
        , commands = [ Run Network "eth0" ["-L","0","-H","32","--normal","green","--high","red"] 10
                     , Run Cpu ["-L","15","-H","50","--normal","green","--high","red"] 10
                     , Run Memory ["-t","Mem: %"] 10
@@ -11,6 +11,8 @@ Config { font = "-misc-fixed-*-*-*-*-13-*-*-*-*-*-*-*"
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "%StdinReader% }{ %cpu% | %memory% * %swap% | %eth0% | %date%"
+       --, template = "%StdinReader% }{ %cpu% | %memory% * %swap% | %eth0% | %date%"
+       -- I just want the date since I run gkrellm all the time
+       , template = "%StdinReader% }{ %date%"
        }
 
