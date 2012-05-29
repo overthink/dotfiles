@@ -27,5 +27,6 @@ eval $(gnome-keyring-daemon --start)
 export GNOME_KEYRING_SOCKET
 export GNOME_KEYRING_PID
 
-exec xmonad
+#exec xmonad
+dbus-launch --exit-with-session xmonad
 
