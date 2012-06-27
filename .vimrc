@@ -56,7 +56,7 @@ set guioptions-=l         " No left srollbar
 set guioptions-=L         " No left srollbar in vertical splits
 set guioptions-=b         " No bottom scrollbar
 "set grepprg=grep\ -EHns   " (E-extended regex, H-print file names, n-print line numbers, s-supress error messages) See: http://unxutils.sourceforge.net/
-set grepprg=ack\ --column
+set grepprg=ack-grep\ --column
 set grepformat=%f:%l:%c:%m
 set viminfo='20,\"50,:256
 set tags=./tags;/         " tags=.tags;/ <-- searches parent dirs for tags files
@@ -237,4 +237,8 @@ function! s:RunShellCommand(cmdline)
   setlocal nomodifiable
   1
 endfunction
+
+" Run a command on the current file and put result in a new buffer in a new
+" split:
+" :new | r ! hg annotate -ud #
 
