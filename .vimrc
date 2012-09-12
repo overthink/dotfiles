@@ -27,6 +27,7 @@ else
 endif
 "set guifont=Envy\ Code\ R:11:cDEFAULT,ProFontWindows:h10:cANSI,Lucida_Console:h10:cANSI,Courier_New:h10:cANSI
 set guifont=Envy\ Code\ R
+"set guifont=ProFont\ 11
 set ruler                  " always show cursor location in file
 set showcmd                " show partially typed commands
 set incsearch              " do incremental searching
