@@ -1,9 +1,21 @@
-"""" to start vim in full-screen in windows, call it like this:
-"""" c:\path\to\vim\gvim.exe -c "simalt ~x" "%1"
-call pathogen#infect()
-call pathogen#helptags()
-filetype plugin indent on
 set nocompatible                  " this enables lots of good stuff
+filetype off                      " required by Vundle
+
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+" Vundle needs to manage itself
+Bundle 'gmarik/vundle'
+
+Bundle 'derekwyatt/vim-scala'
+Bundle 'plasticboy/vim-markdown'
+Bundle 'majutsushi/tagbar'
+Bundle 'tsaleh/vim-matchit'
+Bundle 'vim-scripts/slimv.vim'
+
+filetype plugin indent on         " required again by Vundle
+
+set timeoutlen=250                " Make Esc timeout faster.
+set t_Co=256                      " terminal has 256 colours
 set bg=dark
 set encoding=utf-8                " encoding is used for display purposes
 set noerrorbells                  " shut up!
@@ -37,7 +49,7 @@ set shiftwidth=2           " number of spaces to use for each step of autoindent
 set hidden                 " allow switching buffers even if not saved
 set showmatch              " match parentheses as you type them
 set foldmethod=syntax
-set foldlevelstart=99      " start with folds all open (99 levels anyway)
+set foldlevel=100          " Don't autofold anything
 "set listchars=tab:»·,trail:·,extends:…  " make the hidden characters look nicer
 set nolist                   " show normally hidden characters
 hi SpecialKey guifg=darkgray  " make the listchars characters show up dark gray
@@ -156,34 +168,6 @@ let g:tagbar_type_scala = {
 "
 "   syntax: "function!" causes a function to be replaced if it exists already
 "##############################################################################
-" Enables/Disables folding (compliments: http://www.hut.fi/~tsusi/vim/dot.vimrc)
-function! <SID>ToggleFolding()
-    if &foldcolumn == 0
-        setlocal foldenable
-        setlocal foldcolumn=5
-    else
-        setlocal nofoldenable
-        setlocal foldcolumn=0
-    endif
-endfunction
-
-function! <SID>IncrFoldLevel()
-    " we start at a high foldlevel usually -- like 99; then wrap to 0 if
-    " exceeded
-    if &foldlevel >= &foldlevelstart
-        set foldlevel=0
-    else
-        let s:new_foldlevel=(&foldlevel + 1)
-        let &foldlevel=s:new_foldlevel
-    endif
-endfunction
-
-function! <SID>DecrFoldLevel()
-    if &foldlevel > 0
-        let s:new_foldlevel=(&foldlevel - 1)
-        let &foldlevel=s:new_foldlevel
-    endif
-endfunction
 
 " Hit <s-CR> (used to use <CR>, but screws up use of quickfix window) to
 " highlight the current word without moving the screen.  n/N works to jump
