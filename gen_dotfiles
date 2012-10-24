@@ -17,6 +17,10 @@ cat > $OUTFILE <<EOF
 	ui = true
 [alias]
   st = status
+[web]
+	browser = google-chrome
+[push]
+	default = simple
 
 EOF
 echo "Wrote $OUTFILE"
