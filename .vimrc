@@ -1,6 +1,8 @@
 set nocompatible                  " this enables lots of good stuff
+let mapleader = ","
 filetype off                      " required by Vundle
 
+" Use Vundle to manage plugins: https://github.com/gmarik/vundle
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 " Vundle needs to manage itself
@@ -11,8 +13,13 @@ Bundle 'plasticboy/vim-markdown'
 Bundle 'majutsushi/tagbar'
 Bundle 'tsaleh/vim-matchit'
 Bundle 'vim-scripts/slimv.vim'
+Bundle 'Lokaltog/vim-powerline'
+Bundle 'tpope/vim-fugitive'
 
-filetype plugin indent on         " required again by Vundle
+Bundle 'ervandew/supertab'
+let g:superTabMappingForward = '<c-space>'
+let g:SuperTabMappingBackward = '<s-c-space>'
+let g:SuperTabDefaultCompletionType = 'context'
 
 set timeoutlen=250                " Make Esc timeout faster.
 set t_Co=256                      " terminal has 256 colours
@@ -76,8 +83,6 @@ set tags=./tags;/         " tags=.tags;/ <-- searches parent dirs for tags files
 set tags+=~/dev/jdk_tags,~/dev/scala_tags,~/dev/lift_tags  
 set autochdir             " change working dir to be the location of the current file
 
-let mapleader = ","
-
 "##############################################################################
 " Mappings
 "##############################################################################
@@ -94,24 +99,12 @@ noremap <C-S-Tab> :bprev<CR>
 inoremap <C-S-Tab> <Esc>:bprev<CR>
 cnoremap <C-S-Tab> :bprev<CR>
 
-" Allow toggling of folding (handy to get rid of foldcolumn if it's taking up
-" too much space.
-map <F4> :call <SID>ToggleFolding()<CR>
-imap <F4> <Esc>:call <SID>ToggleFolding()<CR>a
-
-" mappings for compiler-related stuff
-map <F5> :make<CR>
-"map <F8> :cw<CR>
-
 " a handy mapping to fix tabs and kill trailing whitespace
 map <F11> m`:retab<CR>:%s/\s\+$//eg<CR>``
 
 " a mapping to refresh the syntax colouring easily -- this is really only
 " useful when writing syntax files.
 map <F12> :syn sync fromstart<CR>
-
-nmap <silent> <kPlus> <Esc>:call <SID>IncrFoldLevel()<CR>
-nmap <silent> <kMinus> <Esc>:call <SID>DecrFoldLevel()<CR>
 
 "##############################################################################
 " Easier split navigation
@@ -136,14 +129,6 @@ let g:xml_syntax_folding = 1
 "##############################################################################
 " Haskell (http://www.cs.kent.ac.uk/people/staff/cr3/toolbox/haskell/Vim/)
 "##############################################################################
-
-" highlight something in visaul mode, then use the following combos to
-" surround the highlighted area with brackets, parentheses, quotes, etc.
-map <Leader>{ c{}P
-map <Leader>( c()P
-map <Leader>[ c[]P
-map <Leader>" c""P
-map <Leader>' c''P
 
 " Tagbar
 nmap <F8> :TagbarToggle<CR>
@@ -188,40 +173,13 @@ nnoremap <silent> <expr> <s-CR> Highlighting()
 " Hit space to remove highlighting
 nmap <Space> :noh<CR>
 
-let vimclojure#HighlightBuiltins = 1
-let vimclojure#WantNailgun = 1
+"let vimclojure#HighlightBuiltins = 1
+"let vimclojure#WantNailgun = 1
 
-" Not sure why 'filetype plugin indent on' doesn't get this right
-autocmd Filetype python setlocal ts=4 sw=4 sts=4
+" Make Python follow PEP8 (http://www.python.org/dev/peps/pep-0008/)
+autocmd Filetype python setlocal ts=4 sw=4 sts=4 tw=79
 
 autocmd Filetype scala setlocal foldmethod=indent
-
-let g:SuperTabMappingForward = '<c-space>'
-let g:SuperTabMappingBackward = '<s-c-space>'
-let g:SuperTabDefaultCompletionType = 'context'
-
-" Run a shell command and put the output in a scratch buffer.
-" http://vim.wikia.com/wiki/Display_output_of_shell_commands_in_new_window
-" e.g :R hg annotate %
-command! -complete=shellcmd -nargs=+ R call s:RunShellCommand(<q-args>)
-function! s:RunShellCommand(cmdline)
-  echo a:cmdline
-  let expanded_cmdline = a:cmdline
-  for part in split(a:cmdline, ' ')
-     if part[0] =~ '\v[%#<]'
-        let expanded_part = fnameescape(expand(part))
-        let expanded_cmdline = substitute(expanded_cmdline, part, expanded_part, '')
-     endif
-  endfor
-  botright new
-  setlocal buftype=nofile bufhidden=wipe nobuflisted noswapfile nowrap
-  call setline(1, 'You entered:    ' . a:cmdline)
-  call setline(2, 'Expanded Form:  ' .expanded_cmdline)
-  call setline(3,substitute(getline(2),'.','=','g'))
-  execute '$read !'. expanded_cmdline
-  setlocal nomodifiable
-  1
-endfunction
 
 " Run a command on the current file and put result in a new buffer in a new
 " split:
