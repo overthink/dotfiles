@@ -21,6 +21,8 @@ let g:superTabMappingForward = '<c-space>'
 let g:SuperTabMappingBackward = '<s-c-space>'
 let g:SuperTabDefaultCompletionType = 'context'
 
+Bundle 'flazz/vim-colorschemes'
+
 set timeoutlen=250                " Make Esc timeout faster.
 set t_Co=256                      " terminal has 256 colours
 set bg=dark
@@ -37,13 +39,8 @@ set history=256                   " keep lots of history of commands
 set nobackup                      " I'm tired of all these backup files...
 set expandtab                     " I'm also tired of screwed up tabstops, so no more tab -- spaces instead
 syntax enable                     " use syntax hilighting
-if !has("gui_running")
-  " use this scheme in text vim
-  colorscheme ps_color
-else
-  " use this scheme in gui vim
-  colorscheme deveiate
-endif
+"colorscheme deveiate
+colorscheme jellybeans
 "set guifont=Envy\ Code\ R:11:cDEFAULT,ProFontWindows:h10:cANSI,Lucida_Console:h10:cANSI,Courier_New:h10:cANSI
 set guifont=Envy\ Code\ R
 "set guifont=ProFont\ 11
