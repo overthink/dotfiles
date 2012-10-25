@@ -23,8 +23,6 @@ cat > $OUTFILE <<EOF
   in = !git fetch && git log master..FETCH_HEAD
 [web]
 	browser = google-chrome
-[push]
-	default = simple
 
 EOF
 echo "Wrote $OUTFILE"
