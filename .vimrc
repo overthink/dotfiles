@@ -12,7 +12,7 @@ Bundle 'derekwyatt/vim-scala'
 Bundle 'plasticboy/vim-markdown'
 Bundle 'majutsushi/tagbar'
 Bundle 'tsaleh/vim-matchit'
-Bundle 'vim-scripts/slimv.vim'
+Bundle 'overthink/slimv.vim'
 Bundle 'Lokaltog/vim-powerline'
 Bundle 'tpope/vim-fugitive'
 
@@ -23,7 +23,7 @@ let g:SuperTabDefaultCompletionType = 'context'
 
 Bundle 'flazz/vim-colorschemes'
 
-set timeoutlen=250                " Make Esc timeout faster.
+"set timeoutlen=250                " Make Esc timeout faster.
 set t_Co=256                      " terminal has 256 colours
 set bg=dark
 set encoding=utf-8                " encoding is used for display purposes
