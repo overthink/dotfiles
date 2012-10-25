@@ -16,7 +16,11 @@ cat > $OUTFILE <<EOF
 [color]
 	ui = true
 [alias]
+  ci = commit
   st = status
+  serve = instaweb -d webrick # requires ruby, leaves server process hanging around
+  out = !git fetch && git log FETCH_HEAD..master
+  in = !git fetch && git log master..FETCH_HEAD
 [web]
 	browser = google-chrome
 [push]
