@@ -23,6 +23,8 @@ cat > $OUTFILE <<EOF
   in = !git fetch && git log master..FETCH_HEAD
 [web]
 	browser = google-chrome
+[merge]
+  tool = kdiff3
 
 EOF
 echo "Wrote $OUTFILE"
