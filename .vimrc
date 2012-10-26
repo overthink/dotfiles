@@ -39,8 +39,12 @@ set history=256                   " keep lots of history of commands
 set nobackup                      " I'm tired of all these backup files...
 set expandtab                     " I'm also tired of screwed up tabstops, so no more tab -- spaces instead
 syntax enable                     " use syntax hilighting
-"colorscheme deveiate
-colorscheme jellybeans
+if !has("gui_running")
+  colorscheme ps_color
+else
+  colorscheme deveiate
+  "colorscheme jellybeans
+endif
 "set guifont=Envy\ Code\ R:11:cDEFAULT,ProFontWindows:h10:cANSI,Lucida_Console:h10:cANSI,Courier_New:h10:cANSI
 set guifont=Envy\ Code\ R
 "set guifont=ProFont\ 11
