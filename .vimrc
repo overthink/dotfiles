@@ -1,5 +1,4 @@
 set nocompatible                  " this enables lots of good stuff
-let mapleader = ","
 filetype off                      " required by Vundle
 
 " Use Vundle to manage plugins: https://github.com/gmarik/vundle
@@ -12,7 +11,11 @@ Bundle 'derekwyatt/vim-scala'
 Bundle 'plasticboy/vim-markdown'
 Bundle 'majutsushi/tagbar'
 Bundle 'tsaleh/vim-matchit'
-Bundle 'overthink/slimv.vim'
+
+Bundle 'overthink/vimclojure'
+let vimclojure#WantNailgun = 1
+Bundle 'vim-scripts/paredit.vim'
+
 Bundle 'Lokaltog/vim-powerline'
 Bundle 'tpope/vim-fugitive'
 
@@ -23,7 +26,8 @@ let g:SuperTabDefaultCompletionType = 'context'
 
 Bundle 'flazz/vim-colorschemes'
 
-"set timeoutlen=250                " Make Esc timeout faster.
+filetype plugin indent on         " required
+
 set t_Co=256                      " terminal has 256 colours
 set bg=dark
 set encoding=utf-8                " encoding is used for display purposes
@@ -83,6 +87,7 @@ set viminfo='20,\"50,:256
 set tags=./tags;/         " tags=.tags;/ <-- searches parent dirs for tags files
 set tags+=~/dev/jdk_tags,~/dev/scala_tags,~/dev/lift_tags  
 set autochdir             " change working dir to be the location of the current file
+let mapleader = ","
 
 "##############################################################################
 " Mappings
@@ -173,9 +178,6 @@ nnoremap <silent> <expr> <s-CR> Highlighting()
 
 " Hit space to remove highlighting
 nmap <Space> :noh<CR>
-
-"let vimclojure#HighlightBuiltins = 1
-"let vimclojure#WantNailgun = 1
 
 " Make Python follow PEP8 (http://www.python.org/dev/peps/pep-0008/)
 autocmd Filetype python setlocal ts=4 sw=4 sts=4 tw=79
