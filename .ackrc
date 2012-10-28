@@ -1,2 +1,3 @@
 --ignore-dir=snapsort_data
 --ignore-dir=target
+--ignore-dir=.build
