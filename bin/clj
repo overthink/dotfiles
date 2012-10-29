@@ -1,4 +1,0 @@
-#!/bin/sh
-BREAK_CHARS="(){}[],^%$#@\"\";:''|\\"
-rlwrap -r -c -b $BREAK_CHARS -f $HOME/.clj_completions /usr/local/clojure-contrib/launchers/bash/clj-env-dir "$@"
-
