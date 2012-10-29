@@ -180,7 +180,7 @@ nmap <Space> :noh<CR>
 " Make Python follow PEP8 (http://www.python.org/dev/peps/pep-0008/)
 autocmd Filetype python setlocal ts=4 sw=4 sts=4 tw=79
 
-autocmd Filetype scala setlocal foldmethod=indent
+autocmd Filetype scala setlocal foldmethod=indent tw=80
 
 " Run a command on the current file and put result in a new buffer in a new
 " split:
