@@ -21,6 +21,7 @@ cat > $OUTFILE <<EOF
   serve = instaweb -d webrick # requires ruby, leaves server process hanging around
   out = !git fetch && git log FETCH_HEAD..master
   in = !git fetch && git log master..FETCH_HEAD
+  glog = !git log --decorate --graph --oneline --all
 [web]
 	browser = google-chrome
 [merge]

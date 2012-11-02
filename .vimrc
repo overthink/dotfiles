@@ -47,8 +47,8 @@ if !has("gui_running")
   colorscheme ps_color
 else
   colorscheme deveiate
-  "colorscheme jellybeans
 endif
+
 "set guifont=Envy\ Code\ R:11:cDEFAULT,ProFontWindows:h10:cANSI,Lucida_Console:h10:cANSI,Courier_New:h10:cANSI
 set guifont=Envy\ Code\ R
 "set guifont=ProFont\ 11
@@ -62,7 +62,6 @@ set hidden                 " allow switching buffers even if not saved
 set showmatch              " match parentheses as you type them
 set foldmethod=syntax
 set foldlevel=100          " Don't autofold anything
-"set listchars=tab:»·,trail:·,extends:…  " make the hidden characters look nicer
 set nolist                   " show normally hidden characters
 hi SpecialKey guifg=darkgray  " make the listchars characters show up dark gray
 set wildmenu               " Wild!  This thing kicks ass.
@@ -80,7 +79,6 @@ set guioptions-=R         " No right scrollbar in splits
 set guioptions-=l         " No left srollbar
 set guioptions-=L         " No left srollbar in vertical splits
 set guioptions-=b         " No bottom scrollbar
-"set grepprg=grep\ -EHns   " (E-extended regex, H-print file names, n-print line numbers, s-supress error messages) See: http://unxutils.sourceforge.net/
 set grepprg=ack-grep\ --column
 set grepformat=%f:%l:%c:%m
 set viminfo='20,\"50,:256
@@ -88,6 +86,7 @@ set tags=./tags;/         " tags=.tags;/ <-- searches parent dirs for tags files
 set tags+=~/dev/jdk_tags,~/dev/scala_tags,~/dev/lift_tags  
 set autochdir             " change working dir to be the location of the current file
 let mapleader = ","
+set formatoptions+=l      " Don't break and auto-format long lines.
 
 "##############################################################################
 " Mappings
