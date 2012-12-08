@@ -28,6 +28,7 @@ Bundle 'flazz/vim-colorschemes'
 
 filetype plugin indent on         " required
 
+set modeline                      " this is off in Ubuntu by default; f that
 set t_Co=256                      " terminal has 256 colours
 set bg=dark
 set encoding=utf-8                " encoding is used for display purposes
