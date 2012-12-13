@@ -88,6 +88,7 @@ set tags+=~/dev/jdk_tags,~/dev/scala_tags,~/dev/lift_tags
 set autochdir             " change working dir to be the location of the current file
 let mapleader = ","
 set formatoptions+=l      " Don't break and auto-format long lines.
+set formatoptions-=t      " Don't autoformat shit
 
 "##############################################################################
 " Mappings
