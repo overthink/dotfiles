@@ -5,8 +5,6 @@ xrdb -merge .Xresources
 # Note: if height is too small some icons won't appear
 trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --widthtype percent --width 10 --heighttype pixel --height 20 --transparent true --alpha 0 --tint 0x333333 &
 
-#gnome-screensaver for locking screen (seems to be already running in 12.04
-
 # settings daemon is a prereq for some other gnome apps
 gnome-settings-daemon &
 
@@ -20,13 +18,11 @@ if [ -x /usr/bin/gnome-sound-applet ] ; then
   gnome-sound-applet &
 fi
 
-# Set a background image
-feh --bg-scale /home/mark/Pictures/opeth-forest.jpg
+# Manage backgrounds
+nitrogen --restore &
 
 eval $(gnome-keyring-daemon --start)
 export GNOME_KEYRING_SOCKET
 export GNOME_KEYRING_PID
 
-#exec xmonad
-dbus-launch --exit-with-session xmonad
-
+exec xmonad
