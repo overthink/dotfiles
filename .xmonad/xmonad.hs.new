@@ -18,9 +18,11 @@ main = do
     xmproc <- spawnPipe "/usr/bin/xmobar /home/mark/.xmobarrc"
     xmonad $ defaultConfig { terminal = "urxvt" }
         { manageHook = manageDocks <+> manageHook defaultConfig
-        , startupHook = takeTopFocus >> setWMName "LG3D" -- fix for Java apps
+        , startupHook = setWMName "LG3D" -- fix for Java apps
         , layoutHook = avoidStruts  $  layoutHook defaultConfig
-        , logHook = dynamicLogWithPP xmobarPP
+        , logHook = do
+            takeTopFocus
+            dynamicLogWithPP xmobarPP
                         { ppOutput = hPutStrLn xmproc
                         , ppTitle = xmobarColor "green" "" . shorten 50
                         }
