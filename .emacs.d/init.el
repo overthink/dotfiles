@@ -7,6 +7,8 @@
   (package-refresh-contents))
 
 ;;(defvar my-packages '(starter-kit starter-kit-lisp starter-kit-bindings clojure-mode nrepl)
+;;(remove-hook 'prog-mode-hook 'esk-turn-on-hl-line-mode)
+
 (defvar my-packages '(clojure-mode nrepl)
   "A list of packages to ensure are installed at launch.")
 
@@ -16,7 +18,6 @@
 
 (load-theme 'tango-dark t)
 
-;;(remove-hook 'prog-mode-hook 'esk-turn-on-hl-line-mode)
 (menu-bar-mode t)
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
@@ -27,6 +28,15 @@
 (setq backup-directory-alist `(("." . "~/.emacs.d/.saves")))
 (setq backup-by-copying t)
 (setq inhibit-startup-message t)
+(setq undo-limit 10000)
 
 ;; use shorter keystrokes for confirmation dialogues
 (fset 'yes-or-no-p 'y-or-n-p)
+
+;; enable eldoc in clojure buffers
+(add-hook 'nrepl-interaction-mode-hook 'nrepl-turn-on-eldoc-mode)
+
+;; paredit mode for clojure
+(add-hook 'clojure-mode-hook 'paredit-mode)
+(add-hook 'clojure-mode-hook '(lambda ()
+				(local-set-key (kbd "RET") 'newline-and-indent)))
