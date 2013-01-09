@@ -12,9 +12,8 @@ Bundle 'plasticboy/vim-markdown'
 Bundle 'majutsushi/tagbar'
 Bundle 'tsaleh/vim-matchit'
 
-Bundle 'overthink/vimclojure'
-let vimclojure#WantNailgun = 1
-Bundle 'vim-scripts/paredit.vim'
+Bundle 'tpope/vim-foreplay'
+Bundle 'guns/vim-clojure-static'
 
 Bundle 'Lokaltog/vim-powerline'
 Bundle 'tpope/vim-fugitive'
@@ -25,6 +24,7 @@ let g:SuperTabMappingBackward = '<s-c-space>'
 let g:SuperTabDefaultCompletionType = 'context'
 
 Bundle 'flazz/vim-colorschemes'
+Bundle 'krisajenkins/vim-pipe'
 
 filetype plugin indent on         " required
 
