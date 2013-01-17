@@ -189,3 +189,6 @@ autocmd Filetype scala setlocal foldmethod=indent tw=80 formatoptions+=l
 " split:
 " :new | r ! hg annotate -ud #
 
+" For now, my only use of vim-pipe is showing rendered markdown
+let b:vimpipe_command="multimarkdown | lynx -dump -stdin"
+
