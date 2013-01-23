@@ -19,9 +19,6 @@ Bundle 'Lokaltog/vim-powerline'
 Bundle 'tpope/vim-fugitive'
 
 Bundle 'ervandew/supertab'
-let g:superTabMappingForward = '<c-space>'
-let g:SuperTabMappingBackward = '<s-c-space>'
-let g:SuperTabDefaultCompletionType = 'context'
 
 Bundle 'flazz/vim-colorschemes'
 Bundle 'krisajenkins/vim-pipe'
@@ -40,9 +37,8 @@ set whichwrap=<,>,[,],h,l,b,s,~   " Make end/beginning-of-line cursor wrapping b
 set wrap                          " use wrapping
 "set showbreak=---------->         " but emphasize when it occurs
 set autoindent
-set history=256                   " keep lots of history of commands
-set nobackup                      " I'm tired of all these backup files...
-set expandtab                     " I'm also tired of screwed up tabstops, so no more tab -- spaces instead
+set history=1000                  " keep lots of history of commands
+set expandtab                     " spaces, not tabs
 syntax enable                     " use syntax hilighting
 if !has("gui_running")
   colorscheme ps_color
@@ -71,7 +67,7 @@ set wildignore=*.o,*.pyc,*.class
 set laststatus=2           " Always show status bar
 set statusline=%<%f\ %y[%{&ff}]%m%r%w%a\ %=%l/%L,%c%V\ %P  " cooler status line
 set nosol                  " don't jump to the start of the line on a bunch of different movement commands
-set complete=.,w,b,u,U,i,d,k,t  " Better auto completion, full tags last
+set complete=.,w,b,u,U,d,k,t  " Better auto completion, full tags last
 set guioptions-=t         " No tear-off menus
 set guioptions-=T         " No toolbar
 set guioptions-=m         " No top menu
@@ -82,9 +78,7 @@ set guioptions-=L         " No left srollbar in vertical splits
 set guioptions-=b         " No bottom scrollbar
 set grepprg=ack-grep\ --column
 set grepformat=%f:%l:%c:%m
-set viminfo='20,\"50,:256
 set tags=./tags;/         " tags=.tags;/ <-- searches parent dirs for tags files
-set tags+=~/dev/jdk_tags,~/dev/scala_tags,~/dev/lift_tags  
 set autochdir             " change working dir to be the location of the current file
 let mapleader = ","
 set formatoptions+=l      " Don't break and auto-format long lines.
@@ -128,14 +122,25 @@ map <Leader>v :vsplit<CR>
 map <Leader>s :split<CR>
 map <Leader>c :close<CR>
 
-"##############################################################################
-" XML editing (http://www.pinkjuice.com/howto/vimxml/index.xml)
-"##############################################################################
-let g:xml_syntax_folding = 1
+" Stuff stolen from vim-sensible: https://github.com/tpope/vim-sensible
+set viminfo^=!
 
-"##############################################################################
-" Haskell (http://www.cs.kent.ac.uk/people/staff/cr3/toolbox/haskell/Vim/)
-"##############################################################################
+" Dirs not created automatically: mkdir -p ~/.local/share/vim/{swap,backup,undo}
+let s:dir = has('win32') ? '~/Application Data/Vim' : has('mac') ? '~/Library/Vim' : '~/.local/share/vim'
+if isdirectory(expand(s:dir))
+  if &directory =~# '^\.,'
+    let &directory = expand(s:dir) . '/swap//,' . &directory
+  endif
+  if &backupdir =~# '^\.,'
+    let &backupdir = expand(s:dir) . '/backup//,' . &backupdir
+  endif
+  if exists('+undodir') && &undodir =~# '^\.\%(,\|$\)'
+    let &undodir = expand(s:dir) . '/undo//,' . &undodir
+  endif
+endif
+if exists('+undofile')
+  set undofile
+endif
 
 " Tagbar
 nmap <F8> :TagbarToggle<CR>
@@ -191,4 +196,15 @@ autocmd Filetype scala setlocal foldmethod=indent tw=80 formatoptions+=l
 
 " For now, my only use of vim-pipe is showing rendered markdown
 let b:vimpipe_command="multimarkdown | lynx -dump -stdin"
+
+" SuperTab config
+let g:SuperTabDefaultCompletionType = "context"
+let g:SuperTabContextDefaultCompletionType = "<C-x><C-o>"
+let g:SuperTabClosePreviewOnPopupClose = 1
+
+autocmd FileType *
+  \ if &omnifunc != '' |
+  \   call SuperTabChain(&omnifunc, "<c-x><c-n>") |
+  \   call SuperTabSetDefaultCompletionType("<c-x><c-o>") |
+  \ endif
 
