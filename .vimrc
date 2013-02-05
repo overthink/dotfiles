@@ -190,6 +190,8 @@ autocmd Filetype python setlocal ts=4 sw=4 sts=4 tw=79
 
 autocmd Filetype scala setlocal foldmethod=indent tw=80 formatoptions+=l
 
+autocmd Filetype mkd setlocal foldlevel=100
+
 " Run a command on the current file and put result in a new buffer in a new
 " split:
 " :new | r ! hg annotate -ud #
