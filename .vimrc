@@ -61,6 +61,7 @@ set foldmethod=syntax
 set foldlevel=100          " Don't autofold anything
 set nolist                   " show normally hidden characters
 hi SpecialKey guifg=darkgray  " make the listchars characters show up dark gray
+set listchars=tab:>\\,trail:·,extends:#,nbsp:.
 set wildmenu               " Wild!  This thing kicks ass.
 set wildmode=longest,full  " First match only to the longest common string, then use full/wildmenu match
 set wildignore=*.o,*.pyc,*.class

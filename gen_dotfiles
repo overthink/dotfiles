@@ -22,6 +22,7 @@ cat > $OUTFILE <<EOF
   out = !git fetch && git log FETCH_HEAD..master
   in = !git fetch && git log master..FETCH_HEAD
   glog = !git log --decorate --graph --oneline --all
+  ff = !git merge --ff-only
 [web]
 	browser = google-chrome
 [merge]
