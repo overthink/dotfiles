@@ -12,7 +12,8 @@ Bundle 'plasticboy/vim-markdown'
 Bundle 'majutsushi/tagbar'
 Bundle 'tsaleh/vim-matchit'
 
-Bundle 'tpope/vim-foreplay'
+Bundle 'tpope/vim-fireplace'
+Bundle 'tpope/vim-classpath'
 Bundle 'guns/vim-clojure-static'
 
 Bundle 'Lokaltog/vim-powerline'
