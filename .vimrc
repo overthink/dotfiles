@@ -23,6 +23,7 @@ Bundle 'ervandew/supertab'
 
 Bundle 'flazz/vim-colorschemes'
 Bundle 'krisajenkins/vim-pipe'
+Bundle 'wting/rust.vim'
 
 filetype plugin indent on         " required
 
