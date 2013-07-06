@@ -3,12 +3,6 @@
 set -o vi
 
 export EDITOR="vim"
-export JAVA_HOME="/usr/lib/jvm/java-6-sun"
-export M2_HOME="/usr/local/maven"
-export ANT_HOME="/usr/local/ant"
-export SCALA_HOME="/usr/local/scala"
-
-PATH="$PATH:$JAVA_HOME/bin:$M2_HOME/bin:$ANT_HOME/bin:$SCALA_HOME/bin"
 
 # 256 colour terminals: the future is now
 if [ -n "$DISPLAY" -a "$TERM" == "xterm" ]; then
