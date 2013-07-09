@@ -1,28 +1,40 @@
 #!/bin/bash
+# xmonad start script
+# some theft from: https://github.com/davidbrewer/xmonad-ubuntu-conf/blob/master/start-xmonad
 
+# Using gnome-settings-daemon has some advantages: some other gnome crap needs
+# it, and it manages gtk themes properly.
+gnome-settings-daemon &
+sleep 2 # dmenu is occasionally busted without this bs
+
+# cargo cult Xresources loading
 xrdb -merge .Xresources
 
+# Compositor allows transparency effects; de-uglify some things
+xcompmgr -n &
+
+# Manage backgrounds (couldn't get `nitrogen --restore` to work...)
+nitrogen --set-centered ~/bg.jpg
+
 # Note: if height is too small some icons won't appear
-trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --widthtype percent --width 10 --heighttype pixel --height 20 --transparent true --alpha 0 --tint 0x333333 &
-
-# settings daemon is a prereq for some other gnome apps
-gnome-settings-daemon &
-
-# Network monitor (connections, vpns) applet in tray
-if [ -x /usr/bin/nm-applet ] ; then
-  nm-applet --sm-disable &
-fi
-
-# volume indicator in tray
-if [ -x /usr/bin/gnome-sound-applet ] ; then
-  gnome-sound-applet &
-fi
-
-# Manage backgrounds
-nitrogen --restore &
+trayer \
+  --edge top \
+  --align right \
+  --SetDockType true \
+  --SetPartialStrut true \
+  --expand true \
+  --widthtype percent \
+  --width 5 \
+  --heighttype pixel \
+  --height 20 \
+  --transparent true \
+  --alpha 0 \
+  --tint 0x333333 &
 
 eval $(gnome-keyring-daemon --start)
 export GNOME_KEYRING_SOCKET
 export GNOME_KEYRING_PID
 
+# Finally, hand off to xmonad
 exec xmonad
+
