@@ -14,7 +14,7 @@ xrdb -merge .Xresources
 xcompmgr -n &
 
 # Manage backgrounds (couldn't get `nitrogen --restore` to work...)
-nitrogen --set-centered ~/bg.jpg
+nitrogen --set-tiled ~/bg.jpg
 
 # Note: if height is too small some icons won't appear
 trayer \
