@@ -213,3 +213,8 @@ autocmd FileType *
   \   call SuperTabSetDefaultCompletionType("<c-x><c-o>") |
   \ endif
 
+" vim-fireplace clojure mappings
+map ,r :w<CR>:Require!<CR>
+map ,t :w<CR>:Require<CR>:Eval (clojure.test/run-all-tests)<CR>
+map cpP :w<CR>:Eval<CR>
+
