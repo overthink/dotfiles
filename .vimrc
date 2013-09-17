@@ -24,6 +24,7 @@ Bundle 'ervandew/supertab'
 Bundle 'flazz/vim-colorschemes'
 Bundle 'krisajenkins/vim-pipe'
 Bundle 'wting/rust.vim'
+Bundle 'exu/pgsql.vim'
 
 filetype plugin indent on         " required
 
@@ -217,4 +218,8 @@ autocmd FileType *
 map ,r :w<CR>:Require!<CR>
 map ,t :w<CR>:Require<CR>:Eval (clojure.test/run-all-tests)<CR>
 map cpP :w<CR>:Eval<CR>
+
+" Assume postgres
+"let g:sql_type_default = 'pgsql'
+au BufNewFile,BufRead *.sql setf pgsql
 
