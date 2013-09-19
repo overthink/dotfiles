@@ -215,9 +215,10 @@ autocmd FileType *
   \ endif
 
 " vim-fireplace clojure mappings
-map ,r :w<CR>:Require!<CR>
+map ,q :w<CR>:Require!<CR>
+" reset: http://thinkrelevance.com/blog/2013/06/04/clojure-workflow-reloaded
+map ,r :w<CR>:Eval (user/reset)<CR>
 map ,t :w<CR>:Require<CR>:Eval (clojure.test/run-all-tests)<CR>
-map cpP :w<CR>:Eval<CR>
 
 " Assume postgres
 "let g:sql_type_default = 'pgsql'
