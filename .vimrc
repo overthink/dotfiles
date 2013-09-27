@@ -218,7 +218,7 @@ autocmd FileType *
 map ,q :w<CR>:Require!<CR>
 " reset: http://thinkrelevance.com/blog/2013/06/04/clojure-workflow-reloaded
 map ,r :w<CR>:Eval (user/reset)<CR>
-map ,t :w<CR>:Require<CR>:Eval (clojure.test/run-tests)<CR>
+map ,t :w<CR>:Require<CR>:Eval (user/test-all)<CR>
 
 " Assume postgres
 "let g:sql_type_default = 'pgsql'
