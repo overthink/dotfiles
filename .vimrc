@@ -65,6 +65,7 @@ set foldlevel=100          " Don't autofold anything
 set nolist                   " show normally hidden characters
 hi SpecialKey guifg=darkgray  " make the listchars characters show up dark gray
 set listchars=tab:>\\,trail:·,extends:#,nbsp:.
+set list
 set wildmenu               " Wild!  This thing kicks ass.
 set wildmode=longest,full  " First match only to the longest common string, then use full/wildmenu match
 set wildignore=*.o,*.pyc,*.class
@@ -215,10 +216,11 @@ autocmd FileType *
   \ endif
 
 " vim-fireplace clojure mappings
-map ,q :w<CR>:Require!<CR>
+au FileType clojure map ,q :w<CR>:Require!<CR>
 " reset: http://thinkrelevance.com/blog/2013/06/04/clojure-workflow-reloaded
-map ,r :w<CR>:Eval (user/reset)<CR>
-map ,t :w<CR>:Require<CR>:Eval (user/test-all)<CR>
+au FileType clojure map ,r :w<CR>:Eval (user/reset)<CR>
+au FileType clojure map ,t :w<CR>:Require<CR>:Eval (user/test)<CR>
+au FileType clojure map ,T :w<CR>:Require<CR>:Eval (user/test-all)<CR>
 
 " Assume postgres
 "let g:sql_type_default = 'pgsql'
