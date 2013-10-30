@@ -81,6 +81,8 @@ set guioptions-=R         " No right scrollbar in splits
 set guioptions-=l         " No left srollbar
 set guioptions-=L         " No left srollbar in vertical splits
 set guioptions-=b         " No bottom scrollbar
+set guioptions-=e         " Use textmode tabs even in gvim
+set guitablabel=\[%N\]\ %t\ %M " Display tab number and filename in tab
 set grepprg=ack-grep\ --column
 set grepformat=%f:%l:%c:%m
 set tags=./tags;/         " tags=.tags;/ <-- searches parent dirs for tags files
@@ -170,6 +172,32 @@ let g:tagbar_type_scala = {
 "
 "   syntax: "function!" causes a function to be replaced if it exists already
 "##############################################################################
+
+" Ripped from https://github.com/mkitt/tabline.vim
+function! Tabline()
+  let s = ''
+  for i in range(tabpagenr('$'))
+    let tab = i + 1
+    let winnr = tabpagewinnr(tab)
+    let buflist = tabpagebuflist(tab)
+    let bufnr = buflist[winnr - 1]
+    let bufname = bufname(bufnr)
+    let bufmodified = getbufvar(bufnr, "&mod")
+
+    let s .= '%' . tab . 'T'
+    let s .= (tab == tabpagenr() ? '%#TabLineSel#' : '%#TabLine#')
+    let s .= ' ' . tab .':'
+    let s .= (bufname != '' ? '['. fnamemodify(bufname, ':t') . '] ' : '[No Name] ')
+
+    if bufmodified
+      let s .= '[+] '
+    endif
+  endfor
+
+  let s .= '%#TabLineFill#'
+  return s
+endfunction
+set tabline=%!Tabline()
 
 " Hit <s-CR> (used to use <CR>, but screws up use of quickfix window) to
 " highlight the current word without moving the screen.  n/N works to jump
