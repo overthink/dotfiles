@@ -2,3 +2,4 @@
 --ignore-dir=target
 --ignore-dir=.build
 --type-set=clojure=.clj,.cljs
+--ignore-file=is:.lein-repl-history

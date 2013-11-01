@@ -88,6 +88,7 @@ set grepformat=%f:%l:%c:%m
 set tags=./tags;/         " tags=.tags;/ <-- searches parent dirs for tags files
 set autochdir             " change working dir to be the location of the current file
 let mapleader = ","
+let maplocalleader = "\\"
 set formatoptions+=l      " Don't break and auto-format long lines.
 set formatoptions-=t      " Don't autoformat shit
 
@@ -124,10 +125,12 @@ nmap <silent> <c-j> :wincmd j<CR>
 nmap <silent> <c-h> :wincmd h<CR>
 nmap <silent> <c-l> :wincmd l<CR>
 
-" faster splits
-map <Leader>v :vsplit<CR>
-map <Leader>s :split<CR>
-map <Leader>c :close<CR>
+" faster splits and tabs
+map <leader>v :vsplit<CR>
+map <leader>s :split<CR>
+map <leader>c :close<CR>
+" open current split in new tab
+map <leader>t <C-W>T
 
 " Stuff stolen from vim-sensible: https://github.com/tpope/vim-sensible
 set viminfo^=!
@@ -219,11 +222,11 @@ nnoremap <silent> <expr> <s-CR> Highlighting()
 nmap <Space> :noh<CR>
 
 " Make Python follow PEP8 (http://www.python.org/dev/peps/pep-0008/)
-autocmd Filetype python setlocal ts=4 sw=4 sts=4 tw=79
+au Filetype python setlocal ts=4 sw=4 sts=4 tw=79
 
-autocmd Filetype scala setlocal foldmethod=indent tw=80 formatoptions+=l
+au Filetype scala setlocal foldmethod=indent tw=80 formatoptions+=l
 
-autocmd Filetype mkd setlocal foldlevel=100
+au Filetype mkd setlocal foldlevel=100
 
 " Run a command on the current file and put result in a new buffer in a new
 " split:
@@ -237,18 +240,18 @@ let g:SuperTabDefaultCompletionType = "context"
 let g:SuperTabContextDefaultCompletionType = "<C-x><C-o>"
 let g:SuperTabClosePreviewOnPopupClose = 1
 
-autocmd FileType *
+au FileType *
   \ if &omnifunc != '' |
   \   call SuperTabChain(&omnifunc, "<c-x><c-n>") |
   \   call SuperTabSetDefaultCompletionType("<c-x><c-o>") |
   \ endif
 
 " vim-fireplace clojure mappings
-au FileType clojure map ,q :w<CR>:Require!<CR>
+au FileType clojure map <localleader>q :w<CR>:Require!<CR>
 " reset: http://thinkrelevance.com/blog/2013/06/04/clojure-workflow-reloaded
-au FileType clojure map ,r :w<CR>:Eval (user/reset)<CR>
-au FileType clojure map ,t :w<CR>:Require<CR>:Eval (user/test)<CR>
-au FileType clojure map ,T :w<CR>:Require<CR>:Eval (user/test-all)<CR>
+au FileType clojure map <localleader>r :w<CR>:Eval (user/reset)<CR>
+au FileType clojure map <localleader>t :w<CR>:Require<CR>:Eval (user/test)<CR>
+au FileType clojure map <localleader>T :w<CR>:Require<CR>:Eval (user/test-all)<CR>
 
 " Assume postgres
 "let g:sql_type_default = 'pgsql'
