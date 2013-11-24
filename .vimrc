@@ -13,7 +13,7 @@ Bundle 'majutsushi/tagbar'
 Bundle 'tsaleh/vim-matchit'
 
 Bundle 'tpope/vim-fireplace'
-Bundle 'tpope/vim-classpath'
+Bundle 'overthink/vim-classpath'
 Bundle 'guns/vim-clojure-static'
 
 Bundle 'Lokaltog/vim-powerline'
