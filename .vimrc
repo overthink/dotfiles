@@ -11,16 +11,12 @@ Bundle 'derekwyatt/vim-scala'
 Bundle 'plasticboy/vim-markdown'
 Bundle 'majutsushi/tagbar'
 Bundle 'tsaleh/vim-matchit'
-
 Bundle 'tpope/vim-fireplace'
 Bundle 'overthink/vim-classpath'
 Bundle 'guns/vim-clojure-static'
-
 Bundle 'Lokaltog/vim-powerline'
 Bundle 'tpope/vim-fugitive'
-
 Bundle 'ervandew/supertab'
-
 Bundle 'flazz/vim-colorschemes'
 Bundle 'krisajenkins/vim-pipe'
 Bundle 'wting/rust.vim'
@@ -247,6 +243,7 @@ au FileType *
   \ endif
 
 " vim-fireplace clojure mappings
+au FileType clojure map <localleader>e :w<CR>:Eval<CR>
 au FileType clojure map <localleader>q :w<CR>:Require!<CR>
 " reset: http://thinkrelevance.com/blog/2013/06/04/clojure-workflow-reloaded
 au FileType clojure map <localleader>r :w<CR>:Eval (user/reset)<CR>
