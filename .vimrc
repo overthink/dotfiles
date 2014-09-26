@@ -10,17 +10,18 @@ Bundle 'gmarik/vundle'
 Bundle 'derekwyatt/vim-scala'
 Bundle 'plasticboy/vim-markdown'
 Bundle 'majutsushi/tagbar'
-Bundle 'tsaleh/vim-matchit'
+Bundle 'overthink/vim-matchit'
+Bundle 'tpope/vim-leiningen'
 Bundle 'tpope/vim-fireplace'
 Bundle 'overthink/vim-classpath'
 Bundle 'guns/vim-clojure-static'
 Bundle 'Lokaltog/vim-powerline'
 Bundle 'tpope/vim-fugitive'
-Bundle 'ervandew/supertab'
 Bundle 'flazz/vim-colorschemes'
 Bundle 'krisajenkins/vim-pipe'
 Bundle 'wting/rust.vim'
 Bundle 'exu/pgsql.vim'
+Bundle 'godlygeek/tabular'
 
 filetype plugin indent on         " required
 
@@ -231,20 +232,21 @@ au Filetype mkd setlocal foldlevel=100
 " For now, my only use of vim-pipe is showing rendered markdown
 let b:vimpipe_command="multimarkdown | lynx -dump -stdin"
 
-" SuperTab config
-let g:SuperTabDefaultCompletionType = "context"
-let g:SuperTabContextDefaultCompletionType = "<C-x><C-o>"
-let g:SuperTabClosePreviewOnPopupClose = 1
-
-au FileType *
-  \ if &omnifunc != '' |
-  \   call SuperTabChain(&omnifunc, "<c-x><c-n>") |
-  \   call SuperTabSetDefaultCompletionType("<c-x><c-o>") |
-  \ endif
+"" SuperTab config
+"let g:SuperTabDefaultCompletionType = "context"
+"let g:SuperTabContextDefaultCompletionType = "<C-x><C-o>"
+"let g:SuperTabClosePreviewOnPopupClose = 1
+"
+"au FileType *
+"  \ if &omnifunc != '' |
+"  \   call SuperTabChain(&omnifunc, "<c-x><c-n>") |
+"  \   call SuperTabSetDefaultCompletionType("<c-x><c-o>") |
+"  \ endif
 
 " vim-fireplace clojure mappings
 au FileType clojure map <localleader>e :w<CR>:Eval<CR>
-au FileType clojure map <localleader>q :w<CR>:Require!<CR>
+au FileType clojure map <localleader>q :w<CR>:Require<CR>
+au FileType clojure map <localleader>Q :w<CR>:Require!<CR>
 " reset: http://thinkrelevance.com/blog/2013/06/04/clojure-workflow-reloaded
 au FileType clojure map <localleader>r :w<CR>:Eval (user/reset)<CR>
 au FileType clojure map <localleader>t :w<CR>:Require<CR>:Eval (user/test)<CR>
