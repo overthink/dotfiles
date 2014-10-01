@@ -17,7 +17,8 @@ Bundle 'overthink/vim-classpath'
 Bundle 'guns/vim-clojure-static'
 Bundle 'Lokaltog/vim-powerline'
 Bundle 'tpope/vim-fugitive'
-Bundle 'flazz/vim-colorschemes'
+"Bundle 'flazz/vim-colorschemes'
+Bundle 'tomasr/molokai'
 Bundle 'krisajenkins/vim-pipe'
 Bundle 'wting/rust.vim'
 Bundle 'exu/pgsql.vim'
@@ -41,11 +42,9 @@ set history=1000                  " keep lots of history of commands
 set expandtab                     " spaces, not tabs
 syntax enable                     " use syntax hilighting
 if !has("gui_running")
-  colorscheme ps_color
-else
-  colorscheme deveiate
+  "let g:rehash256 = 1  " use in-dev 256 color molokai
 endif
-
+colorscheme molokai
 "set guifont=Envy\ Code\ R:11:cDEFAULT,ProFontWindows:h10:cANSI,Lucida_Console:h10:cANSI,Courier_New:h10:cANSI
 set guifont=Envy\ Code\ R
 "set guifont=ProFont\ 11
@@ -255,4 +254,3 @@ au FileType clojure map <localleader>T :w<CR>:Require<CR>:Eval (user/test-all)<C
 " Assume postgres
 "let g:sql_type_default = 'pgsql'
 au BufNewFile,BufRead *.sql setf pgsql
-
