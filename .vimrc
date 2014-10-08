@@ -96,13 +96,8 @@ set formatoptions-=t      " Don't autoformat shit
 map <A-]> :sp <CR>:exec("tag ".expand("<cword>"))<CR>
 
 " set some mappings to easly cycle through buffers
-noremap <C-Tab> :bnext<CR>
-inoremap <C-Tab> <Esc>:bnext<CR>
-cnoremap <C-Tab> :bnext<CR>
-
-noremap <C-S-Tab> :bprev<CR>
-inoremap <C-S-Tab> <Esc>:bprev<CR>
-cnoremap <C-S-Tab> :bprev<CR>
+nnoremap <C-n> :bn<CR>
+nnoremap <C-p> :bp<CR>
 
 " a handy mapping to fix tabs and kill trailing whitespace
 map <F11> m`:retab<CR>:%s/\s\+$//eg<CR>``
