@@ -1,4 +1,6 @@
 --ignore-dir=snapsort_data
 --ignore-dir=target
 --ignore-dir=.build
+--ignore-dir=.idea
 --type-set=clojure=.clj,.cljs
+--ignore-file=is:tags
