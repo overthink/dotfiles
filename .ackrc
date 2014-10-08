@@ -4,3 +4,4 @@
 --ignore-dir=.idea
 --type-set=clojure=.clj,.cljs
 --ignore-file=is:tags
+--ignore-file=is:cp.txt
