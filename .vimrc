@@ -92,15 +92,16 @@ set formatoptions-=t      " Don't autoformat shit
 " Mappings
 "##############################################################################
 
-" Alt-] to open a tag in a new split
-map <A-]> :sp <CR>:exec("tag ".expand("<cword>"))<CR>
+" .vimrc editing
+nnoremap <leader>ev :split $MYVIMRC<cr>
 
 " set some mappings to easly cycle through buffers
 nnoremap <C-n> :bn<CR>
 nnoremap <C-p> :bp<CR>
 
 " a handy mapping to fix tabs and kill trailing whitespace
-map <F11> m`:retab<CR>:%s/\s\+$//eg<CR>``
+" rt -> re-tab
+map <leader>rt m`:retab<CR>:%s/\s\+$//eg<CR>``
 
 " a mapping to refresh the syntax colouring easily -- this is really only
 " useful when writing syntax files.
@@ -111,10 +112,17 @@ map <F12> :syn sync fromstart<CR>
 "##############################################################################
 
 " Use ctrl-[hjkl] to select the active split! (http://www.vim.org/tips/tip.php?tip_id=173)
-nmap <silent> <c-k> :wincmd k<CR>
-nmap <silent> <c-j> :wincmd j<CR>
-nmap <silent> <c-h> :wincmd h<CR>
-nmap <silent> <c-l> :wincmd l<CR>
+nnoremap <silent> <c-k> :wincmd k<CR>
+nnoremap <silent> <c-j> :wincmd j<CR>
+nnoremap <silent> <c-h> :wincmd h<CR>
+nnoremap <silent> <c-l> :wincmd l<CR>
+
+" Faster split resizing
+" the '^[' is Alt in termal vim http://stackoverflow.com/a/16600458/69689
+nnoremap <silent> j <c-w>+
+nnoremap <silent> k <c-w>-
+nnoremap <silent> h <c-w><
+nnoremap <silent> l <c-w>>
 
 " faster splits and tabs
 map <leader>v :vsplit<CR>
