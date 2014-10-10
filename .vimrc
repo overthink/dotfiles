@@ -117,13 +117,6 @@ nnoremap <silent> <c-j> :wincmd j<CR>
 nnoremap <silent> <c-h> :wincmd h<CR>
 nnoremap <silent> <c-l> :wincmd l<CR>
 
-" Faster split resizing
-" the '^[' is Alt in termal vim http://stackoverflow.com/a/16600458/69689
-nnoremap <silent> j <c-w>+
-nnoremap <silent> k <c-w>-
-nnoremap <silent> h <c-w><
-nnoremap <silent> l <c-w>>
-
 " faster splits and tabs
 map <leader>v :vsplit<CR>
 map <leader>s :split<CR>
