@@ -121,6 +121,7 @@ nnoremap <silent> <c-l> :wincmd l<CR>
 map <leader>v :vsplit<CR>
 map <leader>s :split<CR>
 map <leader>c :close<CR>
+map <leader>o :only<CR>
 " open current split in new tab
 map <leader>t <C-W>T
 
