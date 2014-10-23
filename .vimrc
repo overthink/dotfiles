@@ -17,12 +17,13 @@ Bundle 'overthink/vim-classpath'
 Bundle 'guns/vim-clojure-static'
 Bundle 'Lokaltog/vim-powerline'
 Bundle 'tpope/vim-fugitive'
-"Bundle 'flazz/vim-colorschemes'
 Bundle 'tomasr/molokai'
 Bundle 'krisajenkins/vim-pipe'
 Bundle 'wting/rust.vim'
 Bundle 'exu/pgsql.vim'
 Bundle 'godlygeek/tabular'
+Bundle 'rking/ag.vim'
+Bundle 'kien/ctrlp.vim'
 
 filetype plugin indent on         " required
 
@@ -79,10 +80,10 @@ set guioptions-=L         " No left srollbar in vertical splits
 set guioptions-=b         " No bottom scrollbar
 set guioptions-=e         " Use textmode tabs even in gvim
 set guitablabel=\[%N\]\ %t\ %M " Display tab number and filename in tab
-set grepprg=ack-grep\ --column
-set grepformat=%f:%l:%c:%m
+"set grepprg=ack-grep\ --column
+"set grepformat=%f:%l:%c:%m
 set tags=./tags;/         " tags=.tags;/ <-- searches parent dirs for tags files
-set autochdir             " change working dir to be the location of the current file
+"set autochdir             " change working dir to be the location of the current file
 let mapleader = ","
 let maplocalleader = "\\"
 set formatoptions+=l      " Don't break and auto-format long lines.
@@ -124,6 +125,23 @@ map <leader>c :close<CR>
 map <leader>o :only<CR>
 " open current split in new tab
 map <leader>t <C-W>T
+
+" ctrl-p plugin config
+
+let g:ctrlp_regexp = 1
+
+" I already use c-p! use <leader>f
+let g:ctrlp_map = ''
+nnoremap <leader>f :CtrlP<CR>
+
+" http://blog.patspam.com/2014/super-fast-ctrlp
+let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
+      \ --ignore .git
+      \ --ignore .svn
+      \ --ignore .hg
+      \ --ignore .DS_Store
+      \ --ignore "**/*.pyc"
+      \ -g ""'
 
 " Stuff stolen from vim-sensible: https://github.com/tpope/vim-sensible
 set viminfo^=!
