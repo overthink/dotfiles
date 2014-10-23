@@ -250,17 +250,6 @@ au Filetype mkd setlocal foldlevel=100
 " For now, my only use of vim-pipe is showing rendered markdown
 let b:vimpipe_command="multimarkdown | lynx -dump -stdin"
 
-"" SuperTab config
-"let g:SuperTabDefaultCompletionType = "context"
-"let g:SuperTabContextDefaultCompletionType = "<C-x><C-o>"
-"let g:SuperTabClosePreviewOnPopupClose = 1
-"
-"au FileType *
-"  \ if &omnifunc != '' |
-"  \   call SuperTabChain(&omnifunc, "<c-x><c-n>") |
-"  \   call SuperTabSetDefaultCompletionType("<c-x><c-o>") |
-"  \ endif
-
 " vim-fireplace clojure mappings
 au FileType clojure map <localleader>e :w<CR>:Eval<CR>
 au FileType clojure map <localleader>q :w<CR>:Require<CR>
@@ -273,3 +262,4 @@ au FileType clojure map <localleader>T :w<CR>:Require<CR>:Eval (user/test-all)<C
 " Assume postgres
 "let g:sql_type_default = 'pgsql'
 au BufNewFile,BufRead *.sql setf pgsql
+
