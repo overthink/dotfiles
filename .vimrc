@@ -213,6 +213,10 @@ nnoremap <silent> <expr> <s-CR> Highlighting()
 " Hit space to remove highlighting
 nmap <Space> :noh<CR>
 
+" Check if file changed underneath us
+" http://stackoverflow.com/a/927634/69689
+au CursorHold * checktime
+
 " Make Python follow PEP8 (http://www.python.org/dev/peps/pep-0008/)
 au Filetype python setlocal ts=4 sw=4 sts=4 tw=79
 
