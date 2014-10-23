@@ -83,7 +83,7 @@ set guitablabel=\[%N\]\ %t\ %M " Display tab number and filename in tab
 "set grepprg=ack-grep\ --column
 "set grepformat=%f:%l:%c:%m
 set tags=./tags;/         " tags=.tags;/ <-- searches parent dirs for tags files
-"set autochdir             " change working dir to be the location of the current file
+set autochdir             " change working dir to be the location of the current file
 let mapleader = ","
 let maplocalleader = "\\"
 set formatoptions+=l      " Don't break and auto-format long lines.
