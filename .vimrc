@@ -128,11 +128,9 @@ map <leader>t <C-W>T
 
 " ctrl-p plugin config
 
-let g:ctrlp_regexp = 1
-
-" I already use c-p! use <leader>f
-let g:ctrlp_map = ''
-nnoremap <leader>f :CtrlP<CR>
+" I already use <c-p>, remap
+let g:ctrlp_map = '<leader>f'
+let g:ctrlp_cmd = 'CtrlPMixed'
 
 " http://blog.patspam.com/2014/super-fast-ctrlp
 let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
@@ -234,7 +232,7 @@ nmap <Space> :noh<CR>
 
 " Check if file changed underneath us
 " http://stackoverflow.com/a/927634/69689
-au CursorHold * checktime
+au CursorHold * if getcmdtype() == '' | checktime | endif
 
 " Make Python follow PEP8 (http://www.python.org/dev/peps/pep-0008/)
 au Filetype python setlocal ts=4 sw=4 sts=4 tw=79
