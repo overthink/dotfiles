@@ -262,3 +262,7 @@ au FileType clojure map <localleader>T :w<CR>:Require<CR>:Eval (user/test-all)<C
 "let g:sql_type_default = 'pgsql'
 au BufNewFile,BufRead *.sql setf pgsql
 
+" Abbreviations
+ia becuase because
+ia Becuase Because
+
