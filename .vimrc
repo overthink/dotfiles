@@ -24,6 +24,7 @@ Bundle 'exu/pgsql.vim'
 Bundle 'godlygeek/tabular'
 Bundle 'rking/ag.vim'
 Bundle 'kien/ctrlp.vim'
+Bundle 'overthink/nginx-vim-syntax'
 
 filetype plugin indent on         " required
 
