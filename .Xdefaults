@@ -74,12 +74,6 @@ URxvt*scrollBar_right: false
 # scrollbar style - rxvt (default), plain, next, or xterm
 URxvt*scrollstyle: rxvt
 
-# clickable links
-URxvt.perl-ext-common : default,matcher
-URxvt.urlLauncher     : google-chrome
-URxvt.matcher.button  : 1
-URxvt*colorUL: #86a2be
-
 ! to match gnome-terminal "Linux console" scheme
 ! foreground/background
 URxvt*background: #000000

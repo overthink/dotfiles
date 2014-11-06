@@ -46,7 +46,8 @@ syntax enable                     " use syntax hilighting
 if !has("gui_running")
   "let g:rehash256 = 1  " use in-dev 256 color molokai
 endif
-colorscheme molokai
+"colorscheme molokai
+colorscheme ps_color
 "set guifont=Envy\ Code\ R:11:cDEFAULT,ProFontWindows:h10:cANSI,Lucida_Console:h10:cANSI,Courier_New:h10:cANSI
 set guifont=Envy\ Code\ R
 "set guifont=ProFont\ 11
