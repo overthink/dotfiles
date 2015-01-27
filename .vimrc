@@ -21,7 +21,8 @@ Bundle 'tomasr/molokai'
 Bundle 'krisajenkins/vim-pipe'
 Bundle 'wting/rust.vim'
 Bundle 'exu/pgsql.vim'
-Bundle 'godlygeek/tabular'
+"Bundle 'godlygeek/tabular'
+Bundle 'junegunn/vim-easy-align'
 Bundle 'rking/ag.vim'
 Bundle 'kien/ctrlp.vim'
 Bundle 'overthink/nginx-vim-syntax'
@@ -143,6 +144,12 @@ let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
       \ --ignore .DS_Store
       \ --ignore "**/*.pyc"
       \ -g ""'
+
+" Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
+vmap <Enter> <Plug>(EasyAlign)
+
+" Start interactive EasyAlign for a motion/text object (e.g. <Leader>aip)
+nmap <Leader>a <Plug>(EasyAlign)
 
 " Stuff stolen from vim-sensible: https://github.com/tpope/vim-sensible
 set viminfo^=!
