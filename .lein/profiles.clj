@@ -1,4 +1,4 @@
-{:user {:plugins [[cider/cider-nrepl "0.7.0"]
+{:user {:plugins [[cider/cider-nrepl "0.8.2"]
                   [lein-kibit "0.0.8"]
                   [jonase/eastwood "0.2.1"]
                   ;[lein-nodisassemble "0.1.3"]
