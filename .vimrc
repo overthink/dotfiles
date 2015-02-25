@@ -26,6 +26,8 @@ Bundle 'junegunn/vim-easy-align'
 Bundle 'rking/ag.vim'
 Bundle 'kien/ctrlp.vim'
 Bundle 'overthink/nginx-vim-syntax'
+Bundle 'scrooloose/syntastic'
+Bundle 'tpope/vim-unimpaired'
 
 filetype plugin indent on         " required
 
@@ -263,9 +265,24 @@ au FileType clojure map <localleader>e :w<CR>:Eval<CR>
 au FileType clojure map <localleader>q :w<CR>:Require<CR>
 au FileType clojure map <localleader>Q :w<CR>:Require!<CR>
 " reset: http://thinkrelevance.com/blog/2013/06/04/clojure-workflow-reloaded
-au FileType clojure map <localleader>r :w<CR>:Eval (user/reset)<CR>
+"au FileType clojure map <localleader>r :w<CR>:Eval (user/reset)<CR>
 au FileType clojure map <localleader>t :w<CR>:Require<CR>:Eval (user/test)<CR>
 au FileType clojure map <localleader>T :w<CR>:Require<CR>:Eval (user/test-all)<CR>
+
+" Syntastic options
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 0
+let g:syntastic_check_on_open = 0
+let g:syntastic_check_on_wq = 0
+let g:syntastic_mode_map = {
+    \ "mode": "passive" }
+nnoremap <leader>l :SyntasticCheck<cr>
+nnoremap <leader>L :SyntasticReset<cr>
+
+au FileType gitcommit set spell
 
 " Assume postgres
 "let g:sql_type_default = 'pgsql'
