@@ -13,3 +13,5 @@ if [ -e ~/.bashrc.local ]; then
   . ~/.bashrc.local
 fi
 
+PATH=$PATH:~/.cabal/bin
+
