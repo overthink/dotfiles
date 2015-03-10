@@ -1,0 +1,8 @@
+snapsort_data
+target
+.build
+.idea
+*.iml
+tags
+cp.txt
+.lein-repl-history
