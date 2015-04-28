@@ -94,10 +94,10 @@ bindsym $mod+Shift+q exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 
 # Resize Containers, Vim-style                            ($mod+Control+[hjkl])
 # see http://bugs.i3wm.org/report/ticket/576
-bindsym $mod+Control+j resize grow height 10 px or 10 ppt
-bindsym $mod+Control+k resize shrink height 10 px or 10 ppt
-bindsym $mod+Control+l resize grow width 10 px or 10 ppt
-bindsym $mod+Control+h resize shrink width 10 px or 10 ppt
+bindsym $mod+Control+j resize grow height 10 px
+bindsym $mod+Control+k resize shrink height 10 px
+bindsym $mod+Control+l resize grow width 10 px
+bindsym $mod+Control+h resize shrink width 10 px
 
 ## resize window (you can also use the mouse for that)
 #mode "resize" {
@@ -129,3 +129,16 @@ bindsym $mod+Control+h resize shrink width 10 px or 10 ppt
 bar {
         status_command i3status
 }
+
+# gnome-settings-daemon to get fancy ssh agent. Then add this to ~/.profile
+# if [ "$0" = "/usr/sbin/lightdm-session" -a "$DESKTOP_SESSION" = "i3" ]; then
+#   export $(gnome-keyring-daemon -s)
+# fi
+exec --no-startup-id /usr/lib/gnome-settings-daemon/gnome-settings-daemon
+
+# Gkrellm handling
+for_window [class="(?i)gkrellm"] border none
+for_window [class="(?i)gkrellm"] floating enable
+
+bindsym Ctrl+Shift+$mod+l exec "gnome-screensaver-command --lock"
+
