@@ -264,10 +264,7 @@ let b:vimpipe_command="multimarkdown | lynx -dump -stdin"
 au FileType clojure map <localleader>e :w<CR>:Eval<CR>
 au FileType clojure map <localleader>q :w<CR>:Require<CR>
 au FileType clojure map <localleader>Q :w<CR>:Require!<CR>
-" reset: http://thinkrelevance.com/blog/2013/06/04/clojure-workflow-reloaded
-"au FileType clojure map <localleader>r :w<CR>:Eval (user/reset)<CR>
-au FileType clojure map <localleader>t :w<CR>:Require<CR>:Eval (user/test)<CR>
-au FileType clojure map <localleader>T :w<CR>:Require<CR>:Eval (user/test-all)<CR>
+au FileType clojure map <localleader>c :w<CR>:Require<CR>:Eval (clojure.core.typed/check-ns)<CR>
 
 " Syntastic options
 set statusline+=%#warningmsg#
