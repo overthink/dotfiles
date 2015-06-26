@@ -15,6 +15,7 @@ Bundle 'tpope/vim-leiningen'
 Bundle 'tpope/vim-fireplace'
 Bundle 'overthink/vim-classpath'
 Bundle 'guns/vim-clojure-static'
+Bundle 'typedclojure/vim-typedclojure'
 Bundle 'Lokaltog/vim-powerline'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tomasr/molokai'
@@ -264,7 +265,8 @@ let b:vimpipe_command="multimarkdown | lynx -dump -stdin"
 au FileType clojure map <localleader>e :w<CR>:Eval<CR>
 au FileType clojure map <localleader>q :w<CR>:Require<CR>
 au FileType clojure map <localleader>Q :w<CR>:Require!<CR>
-au FileType clojure map <localleader>c :w<CR>:Require<CR>:Eval (clojure.core.typed/check-ns)<CR>
+au FileType clojure map <localleader>c :CheckNs<CR>
+au FileType clojure map <localleader>t :TypeAt<CR>
 
 " Syntastic options
 set statusline+=%#warningmsg#
