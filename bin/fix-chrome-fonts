@@ -1,0 +1,4 @@
+#!/bin/sh
+# https://code.google.com/p/chromium/issues/detail?id=490964
+xrandr --dpi 96x96
+echo "now restart chrome"
