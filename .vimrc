@@ -277,7 +277,7 @@ let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
 let g:syntastic_mode_map = {
     \ "mode": "passive" }
-nnoremap <leader>l :SyntasticCheck<cr>
+nnoremap <leader>l :w<CR>:SyntasticCheck<cr>
 nnoremap <leader>L :SyntasticReset<cr>
 
 au FileType gitcommit set spell
