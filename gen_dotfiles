@@ -26,7 +26,7 @@ cat > $OUTFILE <<EOF
 [web]
 	browser = google-chrome
 [merge]
-  tool = kdiff3
+  tool = vimdiff
 
 EOF
 echo "Wrote $OUTFILE"
