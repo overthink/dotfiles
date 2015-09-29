@@ -286,6 +286,8 @@ au FileType gitcommit set spell
 "let g:sql_type_default = 'pgsql'
 au BufNewFile,BufRead *.sql setf pgsql
 
+au FileType clojure set lispwords+=context,GET,POST,PUT,DELETE
+
 " Abbreviations
 ia becuase because
 ia Becuase Because
