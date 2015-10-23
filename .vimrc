@@ -283,8 +283,8 @@ nnoremap <leader>L :SyntasticReset<cr>
 au FileType gitcommit set spell
 
 " Assume postgres
-"let g:sql_type_default = 'pgsql'
-au BufNewFile,BufRead *.sql setf pgsql
+let g:sql_type_default = 'pgsql'
+"au BufNewFile,BufRead *.sql setf pgsql
 
 au FileType clojure set lispwords+=context,GET,POST,PUT,DELETE
 
