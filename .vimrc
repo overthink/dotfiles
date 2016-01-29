@@ -251,8 +251,8 @@ au Filetype python setlocal ts=4 sw=4 sts=4 tw=79
 
 au Filetype scala setlocal foldmethod=indent tw=80 formatoptions+=l
 
-au Filetype mkd setlocal foldlevel=100
-au FileType mkd let b:vimpipe_command="multimarkdown | lynx -dump -stdin"
+au Filetype markdown setlocal foldlevel=100
+au FileType markdown let b:vimpipe_command="multimarkdown | lynx -dump -stdin"
 
 " Run a command on the current file and put result in a new buffer in a new
 " split:

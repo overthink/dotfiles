@@ -11,20 +11,17 @@ read email
 OUTFILE="$HOME/.gitconfig"
 cat > $OUTFILE <<EOF
 [user]
-	name = $name
-	email = $email
+  name = $name
+  email = $email
 [color]
-	ui = true
+  ui = true
 [alias]
   ci = commit
   st = status
-  serve = instaweb -d webrick # requires ruby, leaves server process hanging around
-  out = !git fetch && git log FETCH_HEAD..master
-  in = !git fetch && git log master..FETCH_HEAD
   glog = !git log --decorate --graph --oneline --all
   ff = !git merge --ff-only
 [web]
-	browser = google-chrome
+  browser = google-chrome
 [merge]
   tool = vimdiff
 
