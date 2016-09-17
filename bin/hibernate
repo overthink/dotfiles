@@ -1,0 +1,5 @@
+#!/bin/bash
+# pointless sudo to get the pw prompt (pm-suspend needs it)
+sudo echo "hibernating"
+i3lock -c 000000 && sudo pm-suspend
+
