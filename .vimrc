@@ -28,6 +28,7 @@ Bundle 'kien/ctrlp.vim'
 Bundle 'overthink/nginx-vim-syntax'
 Bundle 'scrooloose/syntastic'
 Bundle 'tpope/vim-unimpaired'
+Plugin 'fatih/vim-go'
 
 filetype plugin indent on         " required
 
