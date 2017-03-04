@@ -101,6 +101,7 @@ bindsym $mod+Shift+0 move container to workspace 10
 
 # reload the configuration file
 #bindsym $mod+Shift+c reload
+bindsym Ctrl+Shift+$mod+r reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
@@ -126,6 +127,7 @@ bar {
   colors {
     statusline #eeeeee
     background #333333
+    urgent_workspace #333333 #222222 #aaaaaa
   }
 }
 
@@ -135,6 +137,9 @@ bar {
   tray_output none
   output HDMI-0
 }
+
+# quiet the urgent flag visuals on window titles
+client.urgent #333333 #222222 #aaaaaa #292d2e #222222
 
 # Gkrellm handling
 for_window [class="(?i)gkrellm"] border none
