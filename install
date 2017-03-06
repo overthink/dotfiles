@@ -1,0 +1,59 @@
+#!/bin/bash
+set -euo pipefail
+HERE=$(dirname "${BASH_SOURCE[0]}")
+
+SRC_DIR=$(readlink -m "$HERE/home")
+DST_DIR=$(readlink -m "${1:-$(pwd)}")
+
+errlog() {
+  echo >&2 "$1"
+}
+
+echorun() {
+  echo "$@"
+  "$@"
+}
+
+# Symlink all the files/dirs in $from into $to.
+linkall() {
+  local from="$1"
+  local to="$2"
+  for f in $(ls -A1 "$from"); do
+    src="$from/$f"
+    dst="$to/$f"
+    if [[ -e "$dst" ]]; then
+      errlog "$dst exists, skipping"
+      continue
+    fi
+    # bin gets special handling; I don't link the dir itself, only its contents
+    if [[ "$(basename $src)" == "bin" ]]; then
+      echorun mkdir -p "$dst"
+      linkall "$src" "$dst"
+      continue
+    fi
+    echorun ln -rs "$src" "$dst"
+  done
+}
+
+main() {
+  if [[ ! -d "$SRC_DIR" ]]; then
+    errlog "Source dir $SRC_DIR not a directory"
+    exit 1
+  fi
+
+  if [[ ! -d "$DST_DIR" ]]; then
+    errlog "Destination dir $DST_DIR not a directory"
+    exit 1
+  fi
+:
+  echo "Installing dotfiles from $SRC_DIR to $DST_DIR"
+  linkall "$SRC_DIR" "$DST_DIR"
+
+  # make some dirs my vimrc expects
+  mkdir -p "$HOME"/.local/share/vim/{swap,backup,undo}
+
+  echo "Add 'source \"$HOME/dotfiles/home/bashrc_common\"' to your ~/.bashrc"
+}
+
+main
+
