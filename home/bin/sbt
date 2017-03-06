@@ -1,5 +1,0 @@
-#!/bin/bash
-#java -Xmx512M -jar $(dirname $0)/sbt-launch-0.7.4.jar "$@"
-#java -Xmx1g -XX:MaxPermSize=512m -XX:+UseCompressedOops -XX:+UseConcMarkSweepGC -XX:+CMSClassUnloadingEnabled -noverify -javaagent:/usr/local/jrebel/jrebel.jar -jar $(dirname $0)/sbt-launch-0.7.7.jar "$@"
-java -Xmx1g -XX:MaxPermSize=512m -XX:+UseCompressedOops -XX:+UseConcMarkSweepGC -XX:+CMSClassUnloadingEnabled -jar $(dirname $0)/sbt-launch-0.7.7.jar "$@"
-
