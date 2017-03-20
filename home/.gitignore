@@ -6,3 +6,6 @@
 .xmonad/xmonad.o
 .vim/bundle
 .vim/spell
+.lein/repl-history
+.lein/self-installs/
+.lein/profiles.d/

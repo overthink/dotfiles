@@ -29,6 +29,7 @@ Bundle 'overthink/nginx-vim-syntax'
 Bundle 'scrooloose/syntastic'
 Bundle 'tpope/vim-unimpaired'
 Plugin 'fatih/vim-go'
+Bundle 'jamessan/vim-gnupg'
 
 filetype plugin indent on         " required
 
@@ -291,4 +292,6 @@ au FileType clojure set lispwords+=context,GET,POST,PUT,DELETE
 " Abbreviations
 ia becuase because
 ia Becuase Because
+
+let g:GPGDefaultRecipients = ['mark.feeney@gmail.com']
 
