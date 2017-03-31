@@ -22,7 +22,6 @@ Bundle 'tomasr/molokai'
 Bundle 'krisajenkins/vim-pipe'
 Bundle 'wting/rust.vim'
 Bundle 'exu/pgsql.vim'
-Bundle 'junegunn/vim-easy-align'
 Bundle 'rking/ag.vim'
 Bundle 'kien/ctrlp.vim'
 Bundle 'overthink/nginx-vim-syntax'
@@ -148,12 +147,6 @@ let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
       \ --ignore .DS_Store
       \ --ignore "**/*.pyc"
       \ -g ""'
-
-" Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
-vmap <Enter> <Plug>(EasyAlign)
-
-" Start interactive EasyAlign for a motion/text object (e.g. <Leader>aip)
-nmap <Leader>a <Plug>(EasyAlign)
 
 " Stuff stolen from vim-sensible: https://github.com/tpope/vim-sensible
 set viminfo^=!
@@ -294,4 +287,32 @@ ia becuase because
 ia Becuase Because
 
 let g:GPGDefaultRecipients = ['mark.feeney@gmail.com']
+
+" go, vim-go mappings (mostly from https://github.com/fatih/vim-go-tutorial)
+autocmd FileType go setlocal nolist
+autocmd BufNewFile,BufRead *.go setlocal noexpandtab tabstop=4 shiftwidth=4
+let g:go_fmt_command = "goimports"
+let g:go_auto_type_info = 1
+let g:go_auto_sameids = 1
+" run :GoBuild or :GoTestCompile based on the go file
+function! s:build_go_files()
+  let l:file = expand('%')
+  if l:file =~# '^\f\+_test\.go$'
+    call go#cmd#Test(0, 1)
+  elseif l:file =~# '^\f\+\.go$'
+    call go#cmd#Build(0)
+  endif
+endfunction
+autocmd FileType go nmap <localleader>b :<C-u>call <SID>build_go_files()<CR>
+autocmd FileType go nmap <localleader>r <Plug>(go-run)
+autocmd FileType go nmap <localleader>t <Plug>(go-test)
+autocmd FileType go nmap <localleader>T <Plug>(go-test-func)
+autocmd FileType go nmap <localleader>c <Plug>(go-coverage-toggle)
+autocmd FileType go nmap <localleader>i <Plug>(go-info)
+" 's' for search -- GoDeclsDir + ctrlp.vim is pretty cool
+autocmd FileType go nmap <localleader>s :GoDeclsDir<CR>
+autocmd Filetype go command! -bang A call go#alternate#Switch(<bang>0, 'edit')
+autocmd Filetype go command! -bang AV call go#alternate#Switch(<bang>0, 'vsplit')
+autocmd Filetype go command! -bang AS call go#alternate#Switch(<bang>0, 'split')
+autocmd Filetype go command! -bang AT call go#alternate#Switch(<bang>0, 'tabe')
 
