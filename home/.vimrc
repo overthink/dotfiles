@@ -2,34 +2,35 @@ set nocompatible                  " this enables lots of good stuff
 filetype off                      " required by Vundle
 
 " Use Vundle to manage plugins: https://github.com/gmarik/vundle
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()                "required
 " Vundle needs to manage itself
-Bundle 'gmarik/vundle'
+Plugin 'VundleVim/Vundle.vim'
 
-Bundle 'derekwyatt/vim-scala'
-Bundle 'plasticboy/vim-markdown'
-Bundle 'majutsushi/tagbar'
-Bundle 'overthink/vim-matchit'
-Bundle 'tpope/vim-leiningen'
-Bundle 'tpope/vim-fireplace'
-Bundle 'overthink/vim-classpath'
-Bundle 'guns/vim-clojure-static'
-Bundle 'typedclojure/vim-typedclojure'
-Bundle 'Lokaltog/vim-powerline'
-Bundle 'tpope/vim-fugitive'
-Bundle 'tomasr/molokai'
-Bundle 'krisajenkins/vim-pipe'
-Bundle 'wting/rust.vim'
-Bundle 'exu/pgsql.vim'
-Bundle 'rking/ag.vim'
-Bundle 'kien/ctrlp.vim'
-Bundle 'overthink/nginx-vim-syntax'
-Bundle 'scrooloose/syntastic'
-Bundle 'tpope/vim-unimpaired'
+Plugin 'derekwyatt/vim-scala'
+Plugin 'plasticboy/vim-markdown'
+Plugin 'majutsushi/tagbar'
+Plugin 'overthink/vim-matchit'
+Plugin 'tpope/vim-leiningen'
+Plugin 'tpope/vim-fireplace'
+Plugin 'overthink/vim-classpath'
+Plugin 'guns/vim-clojure-static'
+Plugin 'typedclojure/vim-typedclojure'
+Plugin 'Lokaltog/vim-powerline'
+Plugin 'tpope/vim-fugitive'
+Plugin 'tomasr/molokai'
+Plugin 'krisajenkins/vim-pipe'
+Plugin 'wting/rust.vim'
+Plugin 'exu/pgsql.vim'
+Plugin 'rking/ag.vim'
+Plugin 'kien/ctrlp.vim'
+Plugin 'overthink/nginx-vim-syntax'
+Plugin 'scrooloose/syntastic'
+Plugin 'tpope/vim-unimpaired'
 Plugin 'fatih/vim-go'
-Bundle 'jamessan/vim-gnupg'
+Plugin 'jamessan/vim-gnupg'
 
+call vundle#end()                 " required
 filetype plugin indent on         " required
 
 set modeline                      " this is off in Ubuntu by default; f that
