@@ -29,6 +29,7 @@ Plugin 'scrooloose/syntastic'
 Plugin 'tpope/vim-unimpaired'
 Plugin 'fatih/vim-go'
 Plugin 'jamessan/vim-gnupg'
+Plugin 'Valloric/YouCompleteMe'
 
 call vundle#end()                 " required
 filetype plugin indent on         " required
@@ -76,7 +77,7 @@ set wildignore=*.o,*.pyc,*.class
 set laststatus=2           " Always show status bar
 set statusline=%<%f\ %y[%{&ff}]%m%r%w%a\ %=%l/%L,%c%V\ %P  " cooler status line
 set nosol                  " don't jump to the start of the line on a bunch of different movement commands
-set complete=.,w,b,u,U,d,k,t  " Better auto completion, full tags last
+set complete-=i           " from vim-sensible, blind copy/paste
 set guioptions-=t         " No tear-off menus
 set guioptions-=T         " No toolbar
 set guioptions-=m         " No top menu
@@ -323,4 +324,7 @@ autocmd Filetype go command! -bang A call go#alternate#Switch(<bang>0, 'edit')
 autocmd Filetype go command! -bang AV call go#alternate#Switch(<bang>0, 'vsplit')
 autocmd Filetype go command! -bang AS call go#alternate#Switch(<bang>0, 'split')
 autocmd Filetype go command! -bang AT call go#alternate#Switch(<bang>0, 'tabe')
+
+" YouCompleteMe config
+let g:ycm_autoclose_preview_window_after_completion = 1
 
