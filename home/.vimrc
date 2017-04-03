@@ -29,7 +29,6 @@ Plugin 'scrooloose/syntastic'
 Plugin 'tpope/vim-unimpaired'
 Plugin 'fatih/vim-go'
 Plugin 'jamessan/vim-gnupg'
-Plugin 'Valloric/YouCompleteMe'
 
 call vundle#end()                 " required
 filetype plugin indent on         " required
@@ -325,6 +324,13 @@ autocmd Filetype go command! -bang AV call go#alternate#Switch(<bang>0, 'vsplit'
 autocmd Filetype go command! -bang AS call go#alternate#Switch(<bang>0, 'split')
 autocmd Filetype go command! -bang AT call go#alternate#Switch(<bang>0, 'tabe')
 
-" YouCompleteMe config
-let g:ycm_autoclose_preview_window_after_completion = 1
+" Ctrl-Space for omnicomplete
+" No idea what is going on here, but it works
+" http://stackoverflow.com/a/510571/69689
+inoremap <expr> <C-Space> pumvisible() \|\| &omnifunc == '' ?
+            \ "\<lt>C-n>" :
+            \ "\<lt>C-x>\<lt>C-o><c-r>=pumvisible() ?" .
+            \ "\"\\<lt>c-n>\\<lt>c-p>\\<lt>c-n>\" :" .
+            \ "\" \\<lt>bs>\\<lt>C-n>\"\<CR>"
+imap <C-@> <C-Space>
 
