@@ -20,7 +20,7 @@ Plugin 'Lokaltog/vim-powerline'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tomasr/molokai'
 Plugin 'krisajenkins/vim-pipe'
-Plugin 'wting/rust.vim'
+Plugin 'rust-lang/rust.vim'
 Plugin 'exu/pgsql.vim'
 Plugin 'rking/ag.vim'
 Plugin 'kien/ctrlp.vim'
@@ -29,6 +29,7 @@ Plugin 'scrooloose/syntastic'
 Plugin 'tpope/vim-unimpaired'
 Plugin 'fatih/vim-go'
 Plugin 'jamessan/vim-gnupg'
+Plugin 'cespare/vim-toml'
 
 call vundle#end()                 " required
 filetype plugin indent on         " required
