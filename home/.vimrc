@@ -25,7 +25,7 @@ Plugin 'exu/pgsql.vim'
 Plugin 'rking/ag.vim'
 Plugin 'kien/ctrlp.vim'
 Plugin 'overthink/nginx-vim-syntax'
-Plugin 'scrooloose/syntastic'
+Plugin 'vim-syntastic/syntastic'
 Plugin 'tpope/vim-unimpaired'
 Plugin 'fatih/vim-go'
 Plugin 'jamessan/vim-gnupg'
@@ -294,7 +294,7 @@ let g:GPGDefaultRecipients = ['mark.feeney@gmail.com']
 autocmd FileType go setlocal nolist
 autocmd BufNewFile,BufRead *.go setlocal noexpandtab tabstop=4 shiftwidth=4
 let g:go_fmt_command = "goimports"
-let g:go_auto_type_info = 1
+"let g:go_auto_type_info = 1
 let g:go_auto_sameids = 1
 let g:go_list_type = "quickfix"
 let g:go_highlight_functions = 1
