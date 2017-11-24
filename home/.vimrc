@@ -30,6 +30,7 @@ Plugin 'tpope/vim-unimpaired'
 Plugin 'fatih/vim-go'
 Plugin 'jamessan/vim-gnupg'
 Plugin 'cespare/vim-toml'
+Plugin 'LnL7/vim-nix'
 
 call vundle#end()                 " required
 filetype plugin indent on         " required

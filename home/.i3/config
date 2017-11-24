@@ -6,6 +6,7 @@ exec --no-startup-id xset dpms 600
 exec --no-startup-id xautolock -time 10 -locker "i3lock -c 000000"
 exec --no-startup-id $HOME/.dropbox-dist/dropboxd
 exec --no-startup-id shutter --min_at_startup
+exec --no-startup-id gnome-keyring-daemon --components=pkcs11,secrets,ssh
 
 # Add the following to ~/.profile to get the gui keyring manager
 # if [ "$0" = "/usr/sbin/lightdm-session" -a "$DESKTOP_SESSION" = "i3" ]; then
