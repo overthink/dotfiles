@@ -22,7 +22,7 @@ Plugin 'tomasr/molokai'
 Plugin 'krisajenkins/vim-pipe'
 Plugin 'rust-lang/rust.vim'
 Plugin 'exu/pgsql.vim'
-Plugin 'rking/ag.vim'
+Plugin 'mileszs/ack.vim'
 Plugin 'kien/ctrlp.vim'
 Plugin 'overthink/nginx-vim-syntax'
 Plugin 'vim-syntastic/syntastic'
@@ -335,4 +335,9 @@ inoremap <expr> <C-Space> pumvisible() \|\| &omnifunc == '' ?
             \ "\"\\<lt>c-n>\\<lt>c-p>\\<lt>c-n>\" :" .
             \ "\" \\<lt>bs>\\<lt>C-n>\"\<CR>"
 imap <C-@> <C-Space>
+
+" Use the ack.vim plugin for ag (since ag.vim is deprecated)
+let g:ackprg = 'ag --vimgrep --smart-case'
+cnoreabbrev ag Ack
+cnoreabbrev Ag Ack
 
