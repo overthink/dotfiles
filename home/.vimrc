@@ -341,3 +341,5 @@ let g:ackprg = 'ag --vimgrep --smart-case'
 cnoreabbrev ag Ack
 cnoreabbrev Ag Ack
 
+autocmd BufNewFile,BufRead *.conf setlocal ft=conf
+
