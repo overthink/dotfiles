@@ -336,6 +336,8 @@ inoremap <expr> <C-Space> pumvisible() \|\| &omnifunc == '' ?
             \ "\" \\<lt>bs>\\<lt>C-n>\"\<CR>"
 imap <C-@> <C-Space>
 
+autocmd Filetype rust nnoremap <F5> !cargo run<CR>
+
 " Use the ack.vim plugin for ag (since ag.vim is deprecated)
 let g:ackprg = 'ag --vimgrep --smart-case'
 cnoreabbrev ag Ack
