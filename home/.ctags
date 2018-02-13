@@ -1,3 +1,6 @@
+--fields=+iaS
+--extra=+q
+
 --langmap=Lisp:+.clj
 --langdef=Scala
 --langmap=Scala:.scala
@@ -12,4 +15,13 @@
 --regex-Scala=/^[ \t]*type[ \t]*([a-zA-Z0-9_]+)[ \t]*[\[<>=]/\1/T,types/
 --regex-Scala=/^[ \t]*import[ \t]*([a-zA-Z0-9_{}., \t=>]+$)/\1/i,includes/
 --regex-Scala=/^[ \t]*package[ \t]*([a-zA-Z0-9_.]+$)/\1/p,packages/
+
+--exclude=node_modules
+--exclude=gulp
+--exclude=\*.min.\*
+--exclude=\*.map
+--exclude=tags
+--exclude=bower_components
+--exclude=venv
+--exclude=.build
 
