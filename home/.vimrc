@@ -93,7 +93,7 @@ let maplocalleader = "\\"
 set formatoptions+=l      " Don't break and auto-format long lines.
 set formatoptions-=t      " Don't autoformat shit
 
-let g:airline#extensions#tabline#enabled = 1
+let g:airline_theme='dark'
 
 "##############################################################################
 " Mappings
