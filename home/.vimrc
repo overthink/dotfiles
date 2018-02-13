@@ -15,7 +15,7 @@ Plugin 'tpope/vim-leiningen'
 Plugin 'tpope/vim-fireplace'
 Plugin 'overthink/vim-classpath'
 Plugin 'guns/vim-clojure-static'
-Plugin 'Lokaltog/vim-powerline'
+Plugin 'vim-airline/vim-airline'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-rhubarb'
 Plugin 'tomasr/molokai'
@@ -51,13 +51,10 @@ set history=1000                  " keep lots of history of commands
 set expandtab                     " spaces, not tabs
 syntax enable                     " use syntax hilighting
 if !has("gui_running")
-  "let g:rehash256 = 1  " use in-dev 256 color molokai
 endif
 colorscheme molokai
-let g:Powerline_colorscheme = 'solarized256'
 "set guifont=Envy\ Code\ R:11:cDEFAULT,ProFontWindows:h10:cANSI,Lucida_Console:h10:cANSI,Courier_New:h10:cANSI
 set guifont=Envy\ Code\ R
-"set guifont=ProFont\ 11
 set ruler                  " always show cursor location in file
 set showcmd                " show partially typed commands
 set incsearch              " do incremental searching
@@ -89,14 +86,14 @@ set guioptions-=L         " No left srollbar in vertical splits
 set guioptions-=b         " No bottom scrollbar
 set guioptions-=e         " Use textmode tabs even in gvim
 set guitablabel=\[%N\]\ %t\ %M " Display tab number and filename in tab
-"set grepprg=ack-grep\ --column
-"set grepformat=%f:%l:%c:%m
 set tags=./tags;/         " tags=.tags;/ <-- searches parent dirs for tags files
 set autochdir             " change working dir to be the location of the current file
 let mapleader = ","
 let maplocalleader = "\\"
 set formatoptions+=l      " Don't break and auto-format long lines.
 set formatoptions-=t      " Don't autoformat shit
+
+let g:airline#extensions#tabline#enabled = 1
 
 "##############################################################################
 " Mappings
