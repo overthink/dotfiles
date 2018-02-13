@@ -9,13 +9,13 @@ Plugin 'VundleVim/Vundle.vim'
 
 Plugin 'derekwyatt/vim-scala'
 Plugin 'plasticboy/vim-markdown'
-Plugin 'majutsushi/tagbar'
 Plugin 'overthink/vim-matchit'
 Plugin 'tpope/vim-leiningen'
 Plugin 'tpope/vim-fireplace'
 Plugin 'overthink/vim-classpath'
 Plugin 'guns/vim-clojure-static'
 Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-rhubarb'
 Plugin 'tomasr/molokai'
@@ -167,24 +167,6 @@ endif
 if exists('+undofile')
   set undofile
 endif
-
-" Tagbar
-nmap <F8> :TagbarToggle<CR>
-let g:tagbar_type_scala = {
-    \ 'ctagstype' : 'Scala',
-    \ 'kinds'     : [
-        \ 'p:packages:1',
-        \ 'V:values',
-        \ 'v:variables',
-        \ 'T:types',
-        \ 't:traits',
-        \ 'o:objects',
-        \ 'a:aclasses',
-        \ 'c:classes',
-        \ 'r:cclasses',
-        \ 'm:methods'
-    \ ]
-\ }
 
 "##############################################################################
 " Functions
