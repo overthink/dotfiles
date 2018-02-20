@@ -2,12 +2,16 @@
 --extra=+q
 --exclude=node_modules
 --exclude=gulp
---exclude=\*.min.\*
---exclude=\*.map
+--exclude=*.min.*
+--exclude=*.map
 --exclude=tags
 --exclude=bower_components
 --exclude=venv
 --exclude=.build
+--exclude=jquery*.js
+--exclude=vendor
+--exclude=toserve
+--exclude=*.sql
 
 --langmap=Lisp:+.clj
 --langdef=Scala
