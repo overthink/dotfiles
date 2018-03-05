@@ -11,7 +11,7 @@
 #    - whether interactive or not
 # - .bashrc is NEVER read for login shells
 #    - (IMO this is the basis for most bash config confusion)
-#    - almost everyone "fixes" this by source .bashrc from .*profile
+#    - almost everyone "fixes" this by sourcing .bashrc from .*profile
 # - ssh/remote connections add an additional dimension to test (see table
 #   linked above)
 #
@@ -58,9 +58,10 @@ add_path ~/.cabal/bin
 
 export EDITOR="vim"
 
-if [ "$0" = "/usr/sbin/lightdm-session" -a "$DESKTOP_SESSION" = "i3" ]; then
+if [ "$0" = "/usr/sbin/lightdm-session" ] && [ "$DESKTOP_SESSION" = "i3" ]; then
   export $(gnome-keyring-daemon -s)
 fi
 
+# shellcheck source=/dev/null
 if [ -e ~/.nix-profile/etc/profile.d/nix.sh ]; then . ~/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
 
