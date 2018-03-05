@@ -16,9 +16,11 @@ echorun() {
 
 # Symlink all the files/dirs in $from into $to.
 linkall() {
-  local from="$1"
-  local to="$2"
-  for f in $(ls -A1 "$from"); do
+  local from="${1:?from dir required}"
+  local to="${2:?to dir required}"
+  #for f in $(ls -A1 "$from"); do
+  for f in "$from"/*; do
+    [[ -e $f ]] || break
     src="$from/$f"
     dst="$to/$f"
     if [[ -e "$dst" ]]; then
@@ -26,7 +28,7 @@ linkall() {
       continue
     fi
     # bin gets special handling; I don't link the dir itself, only its contents
-    if [[ "$(basename $src)" == "bin" ]]; then
+    if [[ $(basename "$src") == "bin" ]]; then
       echorun mkdir -p "$dst"
       linkall "$src" "$dst"
       continue
@@ -45,7 +47,7 @@ main() {
     errlog "Destination dir $DST_DIR not a directory"
     exit 1
   fi
-:
+
   echo "Installing dotfiles from $SRC_DIR to $DST_DIR"
   linkall "$SRC_DIR" "$DST_DIR"
 
