@@ -46,10 +46,7 @@ add_path() {
   fi
 }
 
-export GOROOT=~/go1.8
-
 add_path ~/bin
-add_path "$GOROOT/bin"
 add_path ~/go/bin
 add_path ~/.cargo/bin
 add_path ~/nim-0.17.2/bin

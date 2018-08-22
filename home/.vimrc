@@ -139,6 +139,7 @@ map <leader>t <C-W>T
 " I already use <c-p>, remap
 let g:ctrlp_map = '<leader>f'
 let g:ctrlp_cmd = 'CtrlPMixed'
+let g:ctrlp_extensions = ['tag']
 
 " http://blog.patspam.com/2014/super-fast-ctrlp
 let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
