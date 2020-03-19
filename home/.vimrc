@@ -1,6 +1,8 @@
 set nocompatible                  " this enables lots of good stuff
 filetype off                      " required by Vundle
 
+set rtp+=/usr/local/opt/fzf
+
 " Use Vundle to manage plugins: https://github.com/gmarik/vundle
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()                "required
@@ -18,20 +20,20 @@ Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-rhubarb'
-Plugin 'tomasr/molokai'
+Plugin 'sickill/vim-monokai'
 Plugin 'krisajenkins/vim-pipe'
 Plugin 'rust-lang/rust.vim'
 Plugin 'exu/pgsql.vim'
 Plugin 'mileszs/ack.vim'
-Plugin 'kien/ctrlp.vim'
+Plugin 'junegunn/fzf'
 Plugin 'overthink/nginx-vim-syntax'
-Plugin 'vim-syntastic/syntastic'
+Plugin 'w0rp/ale'
 Plugin 'tpope/vim-unimpaired'
 Plugin 'fatih/vim-go'
 Plugin 'jamessan/vim-gnupg'
 Plugin 'cespare/vim-toml'
-Plugin 'LnL7/vim-nix'
-Plugin 'zah/nim.vim'
+Plugin 'jremmen/vim-ripgrep'
+Plugin 'rodjek/vim-puppet'
 
 call vundle#end()                 " required
 filetype plugin indent on         " required
@@ -51,11 +53,7 @@ set autoindent
 set history=1000                  " keep lots of history of commands
 set expandtab                     " spaces, not tabs
 syntax enable                     " use syntax hilighting
-if !has("gui_running")
-endif
-colorscheme molokai
-"set guifont=Envy\ Code\ R:11:cDEFAULT,ProFontWindows:h10:cANSI,Lucida_Console:h10:cANSI,Courier_New:h10:cANSI
-set guifont=Envy\ Code\ R
+colorscheme monokai
 set ruler                  " always show cursor location in file
 set showcmd                " show partially typed commands
 set incsearch              " do incremental searching
@@ -68,6 +66,7 @@ set foldmethod=syntax
 set foldlevel=100          " Don't autofold anything
 set nolist                   " show normally hidden characters
 hi SpecialKey guifg=darkgray  " make the listchars characters show up dark gray
+"hi CursorLine term=bold cterm=bold guibg=Grey40 " highlight lines for visual
 set listchars=tab:>\\,trail:·,extends:#,nbsp:.
 set list
 set wildmenu               " Wild!  This thing kicks ass.
@@ -88,11 +87,12 @@ set guioptions-=b         " No bottom scrollbar
 set guioptions-=e         " Use textmode tabs even in gvim
 set guitablabel=\[%N\]\ %t\ %M " Display tab number and filename in tab
 set tags=./tags;/         " tags=.tags;/ <-- searches parent dirs for tags files
-set autochdir             " change working dir to be the location of the current file
+"set autochdir             " change working dir to be the location of the current file
 let mapleader = ","
 let maplocalleader = "\\"
 set formatoptions+=l      " Don't break and auto-format long lines.
 set formatoptions-=t      " Don't autoformat shit
+set number                " line nums
 
 let g:airline_theme='dark'
 
@@ -109,11 +109,11 @@ nnoremap <C-p> :bp<CR>
 
 " a handy mapping to fix tabs and kill trailing whitespace
 " rt -> re-tab
-map <leader>rt m`:retab<CR>:%s/\s\+$//eg<CR>``
+nnoremap <leader>rt m`:retab<CR>:%s/\s\+$//eg<CR>``
 
 " a mapping to refresh the syntax colouring easily -- this is really only
 " useful when writing syntax files.
-map <F12> :syn sync fromstart<CR>
+nnoremap <F12> :syn sync fromstart<CR>
 
 "##############################################################################
 " Easier split navigation
@@ -126,29 +126,15 @@ nnoremap <silent> <c-h> :wincmd h<CR>
 nnoremap <silent> <c-l> :wincmd l<CR>
 
 " faster splits and tabs
-map <leader>v :vsplit<CR>
-map <leader>s :split<CR>
-map <leader>c :close<CR>
-map <leader>C :bd!<CR>
-map <leader>o :only<CR>
+nnoremap <leader>v :vsplit<CR>
+nnoremap <leader>s :split<CR>
+nnoremap <leader>c :close<CR>
+nnoremap <leader>C :bd!<CR>
+nnoremap <leader>o :only<CR>
 " open current split in new tab
-map <leader>t <C-W>T
+nnoremap <leader>t <C-W>T
 
-" ctrl-p plugin config
-
-" I already use <c-p>, remap
-let g:ctrlp_map = '<leader>f'
-let g:ctrlp_cmd = 'CtrlPMixed'
-let g:ctrlp_extensions = ['tag']
-
-" http://blog.patspam.com/2014/super-fast-ctrlp
-let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
-      \ --ignore .git
-      \ --ignore .svn
-      \ --ignore .hg
-      \ --ignore .DS_Store
-      \ --ignore "**/*.pyc"
-      \ -g ""'
+nnoremap <leader>f :FZF<CR>
 
 " Stuff stolen from vim-sensible: https://github.com/tpope/vim-sensible
 set viminfo^=!
@@ -245,19 +231,6 @@ au FileType clojure map <localleader>Q :w<CR>:Require!<CR>
 au FileType clojure map <localleader>c :CheckNs<CR>
 au FileType clojure map <localleader>t :TypeAt<CR>
 
-" Syntastic options
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 0
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 0
-let g:syntastic_mode_map = {
-    \ "mode": "passive" }
-nnoremap <leader>l :w<CR>:SyntasticCheck<cr>
-nnoremap <leader>L :SyntasticReset<cr>
-
 au FileType gitcommit set spell
 
 " Assume postgres
@@ -326,3 +299,30 @@ cnoreabbrev Ag Ack
 
 autocmd BufNewFile,BufRead *.conf setlocal ft=conf
 
+cnoreabbrev rg Rg
+let g:rg_derive_root = 1
+let g:github_enterprise_urls = ['https://git.corp.stripe.com']
+
+augroup ALE
+  nnoremap <leader>l :w<CR>:ALELint<cr>
+  nnoremap <leader>L :ALEReset<cr>
+  let g:ale_pattern_options = {
+\ 'pay-server/.*\.rb$': { 'ale_ruby_rubocop_executable': 'scripts/bin/rubocop-daemon/rubocop' },
+\}
+  let g:ale_ruby_rubocop_executable = 'bundle'
+  let g:ale_fix_on_save = 1
+  let g:ale_fixers = {}
+  let g:ale_fixers['javascript'] = ['prettier', 'eslint']
+  let g:ale_sign_column_always = 1
+augroup END
+
+augroup VimAirline
+  au!
+  let g:airline_powerline_fonts = 1
+  let g:airline_theme='base16_twilight'
+  let g:airline#extensions#tabline#enabled = 1
+  let g:airline#extensions#tabline#show_buffers = 1
+augroup END
+
+"set clipboard= " TODO: if non-empty, breaks visual mode hilighting on mac... wtf!
+set clipboard=unnamed

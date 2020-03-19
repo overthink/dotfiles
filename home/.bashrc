@@ -18,4 +18,3 @@ HISTFILESIZE=2000
 
 [[ -r ~/.bash_aliases ]] && . ~/.bash_aliases
 [[ -r ~/.bashrc.local ]] && . ~/.bashrc.local
-

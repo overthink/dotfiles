@@ -6,5 +6,4 @@ alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 alias serve='python -m SimpleHTTPServer'
-alias fixssh="eval $(tmux show-env -s |grep '^SSH_')"
-
+alias fixssh='eval $(tmux show-env -s |grep "^SSH_")'
