@@ -2,6 +2,7 @@ set nocompatible                  " this enables lots of good stuff
 filetype off                      " required by Vundle
 
 set rtp+=/usr/local/opt/fzf
+let g:ale_completion_enabled = 1
 
 " Use Vundle to manage plugins: https://github.com/gmarik/vundle
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -21,19 +22,21 @@ Plugin 'vim-airline/vim-airline-themes'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-rhubarb'
 Plugin 'sickill/vim-monokai'
+Plugin 'tomasr/molokai'
 Plugin 'krisajenkins/vim-pipe'
 Plugin 'rust-lang/rust.vim'
 Plugin 'exu/pgsql.vim'
-Plugin 'mileszs/ack.vim'
 Plugin 'junegunn/fzf'
+Plugin 'junegunn/fzf.vim'
 Plugin 'overthink/nginx-vim-syntax'
 Plugin 'w0rp/ale'
 Plugin 'tpope/vim-unimpaired'
 Plugin 'fatih/vim-go'
 Plugin 'jamessan/vim-gnupg'
 Plugin 'cespare/vim-toml'
-Plugin 'jremmen/vim-ripgrep'
 Plugin 'rodjek/vim-puppet'
+Plugin 'ajh17/VimCompletesMe'
+Plugin 'airblade/vim-gitgutter'
 
 call vundle#end()                 " required
 filetype plugin indent on         " required
@@ -53,7 +56,7 @@ set autoindent
 set history=1000                  " keep lots of history of commands
 set expandtab                     " spaces, not tabs
 syntax enable                     " use syntax hilighting
-colorscheme monokai
+colorscheme molokai
 set ruler                  " always show cursor location in file
 set showcmd                " show partially typed commands
 set incsearch              " do incremental searching
@@ -134,7 +137,7 @@ nnoremap <leader>o :only<CR>
 " open current split in new tab
 nnoremap <leader>t <C-W>T
 
-nnoremap <leader>f :FZF<CR>
+nnoremap <leader>f :Files<CR>
 
 " Stuff stolen from vim-sensible: https://github.com/tpope/vim-sensible
 set viminfo^=!
@@ -245,62 +248,32 @@ ia Becuase Because
 
 let g:GPGDefaultRecipients = ['mark.feeney@gmail.com']
 
-" go, vim-go mappings (mostly from https://github.com/fatih/vim-go-tutorial)
-autocmd FileType go setlocal nolist
-autocmd BufNewFile,BufRead *.go setlocal noexpandtab tabstop=4 shiftwidth=4
+" go, vim-go config (mostly from https://github.com/fatih/vim-go-tutorial)
+au BufNewFile,BufRead *.go setlocal noexpandtab tabstop=4 shiftwidth=4
+au FileType go setlocal nolist
+au FileType go nmap <localleader>i <Plug>(go-info)
+au FileType go nmap gr :GoReferrers<CR>
 let g:go_fmt_command = "goimports"
-"let g:go_auto_type_info = 1
-let g:go_auto_sameids = 1
-let g:go_list_type = "quickfix"
-let g:go_highlight_functions = 1
-let g:go_highlight_methods = 1
-let g:go_highlight_fields = 1
-let g:go_highlight_types = 1
+let g:go_highlight_extra_types = 1
 let g:go_highlight_operators = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_types = 1
+let g:go_highlight_fields = 1
 let g:go_highlight_build_constraints = 1
-" run :GoBuild or :GoTestCompile based on the go file
-function! s:build_go_files()
-  let l:file = expand('%')
-  if l:file =~# '^\f\+_test\.go$'
-    call go#cmd#Test(0, 1)
-  elseif l:file =~# '^\f\+\.go$'
-    call go#cmd#Build(0)
-  endif
-endfunction
-autocmd FileType go nmap <localleader>b :<C-u>call <SID>build_go_files()<CR>
-autocmd FileType go nmap <localleader>r <Plug>(go-run)
-autocmd FileType go nmap <localleader>t <Plug>(go-test)
-autocmd FileType go nmap <localleader>T <Plug>(go-test-func)
-autocmd FileType go nmap <localleader>c <Plug>(go-coverage-toggle)
-autocmd FileType go nmap <localleader>i <Plug>(go-info)
-" 's' for search -- GoDeclsDir + ctrlp.vim is pretty cool
-autocmd FileType go nmap <localleader>s :GoDeclsDir<CR>
-autocmd Filetype go command! -bang A call go#alternate#Switch(<bang>0, 'edit')
-autocmd Filetype go command! -bang AV call go#alternate#Switch(<bang>0, 'vsplit')
-autocmd Filetype go command! -bang AS call go#alternate#Switch(<bang>0, 'split')
-autocmd Filetype go command! -bang AT call go#alternate#Switch(<bang>0, 'tabe')
+let g:go_highlight_generate_tags = 1
+let g:go_auto_type_info = 1
+let g:go_auto_sameids = 1
 
-" Ctrl-Space for omnicomplete
-" No idea what is going on here, but it works
-" http://stackoverflow.com/a/510571/69689
-inoremap <expr> <C-Space> pumvisible() \|\| &omnifunc == '' ?
-            \ "\<lt>C-n>" :
-            \ "\<lt>C-x>\<lt>C-o><c-r>=pumvisible() ?" .
-            \ "\"\\<lt>c-n>\\<lt>c-p>\\<lt>c-n>\" :" .
-            \ "\" \\<lt>bs>\\<lt>C-n>\"\<CR>"
-imap <C-@> <C-Space>
+" prefer grepping with ripgrep
+if executable("rg")
+    set grepprg=rg\ --vimgrep\ --no-heading
+    set grepformat=%f:%l:%c:%m,%f:%l:%m
+endif
 
 autocmd Filetype rust nnoremap <F5> !cargo run<CR>
 
-" Use the ack.vim plugin for ag (since ag.vim is deprecated)
-let g:ackprg = 'ag --vimgrep --smart-case'
-cnoreabbrev ag Ack
-cnoreabbrev Ag Ack
-
 autocmd BufNewFile,BufRead *.conf setlocal ft=conf
 
-cnoreabbrev rg Rg
-let g:rg_derive_root = 1
 let g:github_enterprise_urls = ['https://git.corp.stripe.com']
 
 augroup ALE
@@ -310,7 +283,6 @@ augroup ALE
 \ 'pay-server/.*\.rb$': { 'ale_ruby_rubocop_executable': 'scripts/bin/rubocop-daemon/rubocop' },
 \}
   let g:ale_ruby_rubocop_executable = 'bundle'
-  let g:ale_fix_on_save = 1
   let g:ale_fixers = {}
   let g:ale_fixers['javascript'] = ['prettier', 'eslint']
   let g:ale_sign_column_always = 1
