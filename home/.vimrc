@@ -37,6 +37,7 @@ Plugin 'cespare/vim-toml'
 Plugin 'rodjek/vim-puppet'
 Plugin 'ajh17/VimCompletesMe'
 Plugin 'airblade/vim-gitgutter'
+Plugin 'easymotion/vim-easymotion'
 
 call vundle#end()                 " required
 filetype plugin indent on         " required
