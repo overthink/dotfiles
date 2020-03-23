@@ -38,6 +38,7 @@ Plugin 'rodjek/vim-puppet'
 Plugin 'ajh17/VimCompletesMe'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'easymotion/vim-easymotion'
+"Plugin 'preservim/nerdcommenter'
 
 call vundle#end()                 " required
 filetype plugin indent on         " required
@@ -98,14 +99,18 @@ set formatoptions+=l      " Don't break and auto-format long lines.
 set formatoptions-=t      " Don't autoformat shit
 set number                " line nums
 
-let g:airline_theme='dark'
-
 "##############################################################################
 " Mappings
 "##############################################################################
 
+" open left side explore in current buffer's dir
+"nnoremap <leader>ee :Lex %:p:h<CR>
+
+" open left side explore from vim's cwd
+"nnoremap <leader>ec :Lex<CR>
+
 " .vimrc editing
-nnoremap <leader>ev :split $MYVIMRC<cr>
+nnoremap <leader>ev :split $MYVIMRC<CR>
 
 " set some mappings to easly cycle through buffers
 nnoremap <C-n> :bn<CR>
@@ -165,32 +170,6 @@ endif
 "
 "   syntax: "function!" causes a function to be replaced if it exists already
 "##############################################################################
-
-" Ripped from https://github.com/mkitt/tabline.vim
-function! Tabline()
-  let s = ''
-  for i in range(tabpagenr('$'))
-    let tab = i + 1
-    let winnr = tabpagewinnr(tab)
-    let buflist = tabpagebuflist(tab)
-    let bufnr = buflist[winnr - 1]
-    let bufname = bufname(bufnr)
-    let bufmodified = getbufvar(bufnr, "&mod")
-
-    let s .= '%' . tab . 'T'
-    let s .= (tab == tabpagenr() ? '%#TabLineSel#' : '%#TabLine#')
-    let s .= ' ' . tab .':'
-    let s .= (bufname != '' ? '['. fnamemodify(bufname, ':t') . '] ' : '[No Name] ')
-
-    if bufmodified
-      let s .= '[+] '
-    endif
-  endfor
-
-  let s .= '%#TabLineFill#'
-  return s
-endfunction
-set tabline=%!Tabline()
 
 " Hit <s-CR> (used to use <CR>, but screws up use of quickfix window) to
 " highlight the current word without moving the screen.  n/N works to jump
@@ -262,14 +241,25 @@ let g:go_highlight_types = 1
 let g:go_highlight_fields = 1
 let g:go_highlight_build_constraints = 1
 let g:go_highlight_generate_tags = 1
-let g:go_auto_type_info = 1
-let g:go_auto_sameids = 1
+"let g:go_auto_type_info = 1
+"let g:go_auto_sameids = 1
 
-" prefer grepping with ripgrep
+" Use rg for :grep
 if executable("rg")
-    set grepprg=rg\ --vimgrep\ --no-heading
-    set grepformat=%f:%l:%c:%m,%f:%l:%m
+  set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case
+  set grepformat=%f:%l:%c:%m,%f:%l:%m
 endif
+
+" Delegate fzf's ':Rg' to ripgrip directly
+function! RipgrepFzf(query, fullscreen)
+  let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case %s || true'
+  let initial_command = printf(command_fmt, shellescape(a:query))
+  let reload_command = printf(command_fmt, '{q}')
+  let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
+  call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
+endfunction
+
+command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
 
 autocmd Filetype rust nnoremap <F5> !cargo run<CR>
 
@@ -278,8 +268,8 @@ autocmd BufNewFile,BufRead *.conf setlocal ft=conf
 let g:github_enterprise_urls = ['https://git.corp.stripe.com']
 
 augroup ALE
-  nnoremap <leader>l :w<CR>:ALELint<cr>
-  nnoremap <leader>L :ALEReset<cr>
+  nnoremap <leader>l :w<CR>:ALELint<CR>
+  nnoremap <leader>L :ALEReset<CR>
   let g:ale_pattern_options = {
 \ 'pay-server/.*\.rb$': { 'ale_ruby_rubocop_executable': 'scripts/bin/rubocop-daemon/rubocop' },
 \}
@@ -291,10 +281,12 @@ augroup END
 
 augroup VimAirline
   au!
+  let g:airline_theme='dark'
   let g:airline_powerline_fonts = 1
-  let g:airline_theme='base16_twilight'
-  let g:airline#extensions#tabline#enabled = 1
-  let g:airline#extensions#tabline#show_buffers = 1
+  "let g:airline_theme='base16_twilight'
+  let g:airline_theme='minimalist'
+  "let g:airline#extensions#tabline#enabled = 1
+  "let g:airline#extensions#tabline#show_buffers = 1
 augroup END
 
 "set clipboard= " TODO: if non-empty, breaks visual mode hilighting on mac... wtf!
