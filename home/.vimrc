@@ -2,7 +2,6 @@ set nocompatible                  " this enables lots of good stuff
 filetype off                      " required by Vundle
 
 set rtp+=/usr/local/opt/fzf
-let g:ale_completion_enabled = 1
 
 " Use Vundle to manage plugins: https://github.com/gmarik/vundle
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -38,7 +37,6 @@ Plugin 'rodjek/vim-puppet'
 Plugin 'ajh17/VimCompletesMe'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'easymotion/vim-easymotion'
-"Plugin 'preservim/nerdcommenter'
 
 call vundle#end()                 " required
 filetype plugin indent on         " required
@@ -67,7 +65,7 @@ set tabstop=2              " number of spaces that a <Tab> in the file counts fo
 set shiftwidth=2           " number of spaces to use for each step of autoindent
 set hidden                 " allow switching buffers even if not saved
 set showmatch              " match parentheses as you type them
-set foldmethod=syntax
+"set foldmethod=syntax
 set foldlevel=100          " Don't autofold anything
 set nolist                   " show normally hidden characters
 hi SpecialKey guifg=darkgray  " make the listchars characters show up dark gray
@@ -98,16 +96,18 @@ let maplocalleader = "\\"
 set formatoptions+=l      " Don't break and auto-format long lines.
 set formatoptions-=t      " Don't autoformat shit
 set number                " line nums
+set updatetime=300        " after this many ms the swap file is written (default 4000)
+set signcolumn=yes        " always show the extra column on the left to avoid text shifting around
+set shortmess+=c          " don't add noisy status messages to completion popup
+
+" :Files from fzf
+nnoremap <leader>f :Files<CR>
+" r for 'recent' (:History is from fzf)
+nnoremap <leader>r :History<CR>
 
 "##############################################################################
 " Mappings
 "##############################################################################
-
-" open left side explore in current buffer's dir
-"nnoremap <leader>ee :Lex %:p:h<CR>
-
-" open left side explore from vim's cwd
-"nnoremap <leader>ec :Lex<CR>
 
 " .vimrc editing
 nnoremap <leader>ev :split $MYVIMRC<CR>
@@ -118,7 +118,7 @@ nnoremap <C-p> :bp<CR>
 
 " a handy mapping to fix tabs and kill trailing whitespace
 " rt -> re-tab
-nnoremap <leader>rt m`:retab<CR>:%s/\s\+$//eg<CR>``
+" nnoremap <leader>rt m`:retab<CR>:%s/\s\+$//eg<CR>``
 
 " a mapping to refresh the syntax colouring easily -- this is really only
 " useful when writing syntax files.
@@ -143,7 +143,9 @@ nnoremap <leader>o :only<CR>
 " open current split in new tab
 nnoremap <leader>t <C-W>T
 
-nnoremap <leader>f :Files<CR>
+" jump between hunks (vimgutter)
+nnoremap ]h <Plug>(GitGutterNextHunk)
+nnoremap [h <Plug>(GitGutterPrevHunk)
 
 " Stuff stolen from vim-sensible: https://github.com/tpope/vim-sensible
 set viminfo^=!
@@ -171,22 +173,6 @@ endif
 "   syntax: "function!" causes a function to be replaced if it exists already
 "##############################################################################
 
-" Hit <s-CR> (used to use <CR>, but screws up use of quickfix window) to
-" highlight the current word without moving the screen.  n/N works to jump
-" between matches.
-" http://vim.wikia.com/wiki/Highlight_all_search_pattern_matches
-let g:highlighting = 0
-function! Highlighting()
-  if g:highlighting == 1 && @/ =~ '^\\<'.expand('<cword>').'\\>$'
-    let g:highlighting = 0
-    return ":silent nohlsearch\<CR>"
-  endif
-  let @/ = '\<'.expand('<cword>').'\>'
-  let g:highlighting = 1
-  return ":silent set hlsearch\<CR>"
-endfunction
-nnoremap <silent> <expr> <s-CR> Highlighting()
-
 " Hit space to remove highlighting
 nmap <Space> :noh<CR>
 
@@ -206,21 +192,19 @@ au FileType markdown let b:vimpipe_command="multimarkdown | lynx -dump -stdin"
 " split:
 " :new | r ! hg annotate -ud #
 
-
-" vim-fireplace clojure mappings
-au FileType clojure map <localleader>e :w<CR>:Eval<CR>
-au FileType clojure map <localleader>q :w<CR>:Require<CR>
-au FileType clojure map <localleader>Q :w<CR>:Require!<CR>
-au FileType clojure map <localleader>c :CheckNs<CR>
-au FileType clojure map <localleader>t :TypeAt<CR>
+augroup clojure
+  " vim-fireplace clojure mappings
+  au FileType clojure map <localleader>e :w<CR>:Eval<CR>
+  au FileType clojure map <localleader>q :w<CR>:Require<CR>
+  au FileType clojure map <localleader>Q :w<CR>:Require!<CR>
+  au FileType clojure map <localleader>c :CheckNs<CR>
+  au FileType clojure set lispwords+=context,GET,POST,PUT,DELETE
+augroup END
 
 au FileType gitcommit set spell
-
 " Assume postgres
 let g:sql_type_default = 'pgsql'
 "au BufNewFile,BufRead *.sql setf pgsql
-
-au FileType clojure set lispwords+=context,GET,POST,PUT,DELETE
 
 " Abbreviations
 ia becuase because
@@ -228,21 +212,24 @@ ia Becuase Because
 
 let g:GPGDefaultRecipients = ['mark.feeney@gmail.com']
 
-" go, vim-go config (mostly from https://github.com/fatih/vim-go-tutorial)
-au BufNewFile,BufRead *.go setlocal noexpandtab tabstop=4 shiftwidth=4
-au FileType go setlocal nolist
-au FileType go nmap <localleader>i <Plug>(go-info)
-au FileType go nmap gr :GoReferrers<CR>
-let g:go_fmt_command = "goimports"
-let g:go_highlight_extra_types = 1
-let g:go_highlight_operators = 1
-let g:go_highlight_functions = 1
-let g:go_highlight_types = 1
-let g:go_highlight_fields = 1
-let g:go_highlight_build_constraints = 1
-let g:go_highlight_generate_tags = 1
-"let g:go_auto_type_info = 1
-"let g:go_auto_sameids = 1
+augroup golang
+  " go, vim-go config (mostly from https://github.com/fatih/vim-go-tutorial)
+  au!
+  au BufNewFile,BufRead *.go setlocal noexpandtab tabstop=4 shiftwidth=4
+  au FileType go setlocal nolist
+  au FileType go nmap <localleader>i <Plug>(go-info)
+  au FileType go nmap gr :GoReferrers<CR>
+  let g:go_fmt_command = "goimports"
+  let g:go_highlight_extra_types = 1
+  let g:go_highlight_operators = 1
+  let g:go_highlight_functions = 1
+  let g:go_highlight_types = 1
+  let g:go_highlight_fields = 1
+  let g:go_highlight_build_constraints = 1
+  let g:go_highlight_generate_tags = 1
+  "let g:go_auto_type_info = 1
+  "let g:go_auto_sameids = 1
+augroup END
 
 " Use rg for :grep
 if executable("rg")
@@ -261,15 +248,23 @@ endfunction
 
 command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
 
-autocmd Filetype rust nnoremap <F5> !cargo run<CR>
+augroup rust
+  au!
+  au Filetype rust nnoremap <F5> !cargo run<CR>
+augroup END
 
-autocmd BufNewFile,BufRead *.conf setlocal ft=conf
+augroup conf
+  au!
+  au BufNewFile,BufRead *.conf setlocal ft=conf
+augroup END
 
 let g:github_enterprise_urls = ['https://git.corp.stripe.com']
 
 augroup ALE
   nnoremap <leader>l :w<CR>:ALELint<CR>
   nnoremap <leader>L :ALEReset<CR>
+  let g:ale_lint_on_enter = 0
+  let g:ale_lint_on_text_changed = 0
   let g:ale_pattern_options = {
 \ 'pay-server/.*\.rb$': { 'ale_ruby_rubocop_executable': 'scripts/bin/rubocop-daemon/rubocop' },
 \}
@@ -280,14 +275,12 @@ augroup ALE
 augroup END
 
 augroup VimAirline
-  au!
   let g:airline_theme='dark'
   let g:airline_powerline_fonts = 1
-  "let g:airline_theme='base16_twilight'
   let g:airline_theme='minimalist'
-  "let g:airline#extensions#tabline#enabled = 1
-  "let g:airline#extensions#tabline#show_buffers = 1
 augroup END
+
+let ruby_no_expensive = 1
 
 "set clipboard= " TODO: if non-empty, breaks visual mode hilighting on mac... wtf!
 set clipboard=unnamed
