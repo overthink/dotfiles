@@ -100,10 +100,35 @@ set updatetime=300        " after this many ms the swap file is written (default
 set signcolumn=yes        " always show the extra column on the left to avoid text shifting around
 set shortmess+=c          " don't add noisy status messages to completion popup
 
-" :Files from fzf
-nnoremap <leader>f :Files<CR>
-" r for 'recent' (:History is from fzf)
-nnoremap <leader>r :History<CR>
+augroup FZF
+  " :Files from fzf
+  nnoremap <leader>f :Files<CR>
+  " e because ctrl-e was recent files in IntelliJ
+  nnoremap <leader>e :History<CR>
+  nnoremap <leader>r :Rg <C-R><C-W><CR>
+  " add ctrl-q to fzf (for populating quickfix list with selected results)
+  function! s:build_quickfix_list(lines)
+    call setqflist(map(copy(a:lines), '{ "filename": v:val }'))
+    copen
+    cc
+  endfunction
+  let g:fzf_action = {
+    \ 'ctrl-q': function('s:build_quickfix_list'),
+    \ 'ctrl-t': 'tab split',
+    \ 'ctrl-s': 'split',
+    \ 'ctrl-v': 'vsplit' }
+  " Delegate fzf's ':Rg' to ripgrip directly
+  function! RipgrepFzf(query, fullscreen)
+    let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case %s || true'
+    let initial_command = printf(command_fmt, shellescape(a:query))
+    let reload_command = printf(command_fmt, '{q}')
+    let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
+    call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
+  endfunction
+
+  " override the :Rg that comes with fzf-vim
+  command! -nargs=* -bang Rg call RipgrepFzf(<q-args>, <bang>0)
+augroup END
 
 "##############################################################################
 " Mappings
@@ -237,16 +262,11 @@ if executable("rg")
   set grepformat=%f:%l:%c:%m,%f:%l:%m
 endif
 
-" Delegate fzf's ':Rg' to ripgrip directly
-function! RipgrepFzf(query, fullscreen)
-  let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case %s || true'
-  let initial_command = printf(command_fmt, shellescape(a:query))
-  let reload_command = printf(command_fmt, '{q}')
-  let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
-  call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
-endfunction
-
-command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
+" like :grep, but open quickfix unconditionally and don't focus it (use
+" vim-unimparied to move between entries)
+command! -nargs=+ -bar MyGrep silent! grep! <args>|copen|exe 'wincmd p'|redraw!
+" grep for word under cursor and open in quickfix (mnemonic: 'all files')
+nmap <leader>a :MyGrep <C-R><C-W><CR>
 
 augroup rust
   au!
