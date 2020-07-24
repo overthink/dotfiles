@@ -26,7 +26,7 @@ Plugin 'exu/pgsql.vim'
 Plugin 'junegunn/fzf'
 Plugin 'junegunn/fzf.vim'
 Plugin 'overthink/nginx-vim-syntax'
-Plugin 'w0rp/ale'
+Plugin 'dense-analysis/ale'
 Plugin 'tpope/vim-unimpaired'
 Plugin 'fatih/vim-go'
 Plugin 'jamessan/vim-gnupg'
@@ -273,8 +273,8 @@ augroup golang
   au!
   au BufNewFile,BufRead *.go setlocal noexpandtab tabstop=4 shiftwidth=4
   au FileType go setlocal nolist
-  au FileType go nmap <localleader>i <Plug>(go-info)
-  au FileType go nmap gr :GoReferrers<CR>
+  au FileType go nmap <buffer> <localleader>i <Plug>(go-info)
+  au FileType go nmap <buffer> gr :GoReferrers<CR>
   let g:go_fmt_command = "goimports"
   let g:go_highlight_extra_types = 1
   let g:go_highlight_operators = 1
@@ -331,6 +331,8 @@ augroup ALE
     \'ruby': ['rubocop'],
   \}
   let g:ale_sign_column_always = 1
+  au FileType javascriptreact nnoremap <buffer> <localleader>i :ALEHover<CR>
+  au FileType javascriptreact nnoremap <buffer> gd :ALEGoToDefinition<CR>
 augroup END
 
 let ruby_no_expensive = 1
