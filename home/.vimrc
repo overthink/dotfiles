@@ -16,8 +16,6 @@ Plugin 'tpope/vim-leiningen'
 Plugin 'tpope/vim-fireplace'
 Plugin 'overthink/vim-classpath'
 Plugin 'guns/vim-clojure-static'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-rhubarb'
 Plugin 'sickill/vim-monokai'
@@ -76,8 +74,8 @@ set list
 set wildmenu               " Wild!  This thing kicks ass.
 set wildmode=longest,full  " First match only to the longest common string, then use full/wildmenu match
 set wildignore=*.o,*.pyc,*.class
-set laststatus=2           " Always show status bar
-set statusline=%<%f\ %y[%{&ff}]%m%r%w%a\ %=%l/%L,%c%V\ %P  " cooler status line
+set laststatus=2           " Always show status line
+"set statusline=%<%f\ %y[%{&ff}]%m%r%w%a\ %=%l/%L,%c%V\ %P  " cooler status line
 set nosol                  " don't jump to the start of the line on a bunch of different movement commands
 set complete-=i           " from vim-sensible, blind copy/paste
 set guioptions-=t         " No tear-off menus
@@ -100,6 +98,32 @@ set number                " line nums
 set updatetime=300        " after this many ms the swap file is written (default 4000)
 set signcolumn=yes        " always show the extra column on the left to avoid text shifting around
 set shortmess+=c          " don't add noisy status messages to completion popup
+
+augroup STATUSLINE
+  function! GitBranch()
+    return system("git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
+  endfunction
+
+  function! StatuslineGit()
+    let l:branchname = GitBranch()
+    return strlen(l:branchname) > 0?'  '.l:branchname.' ':''
+  endfunction
+
+  set statusline=
+  set statusline+=%#PmenuSel#
+  set statusline+=%{StatuslineGit()}
+  set statusline+=%#LineNr#
+  set statusline+=\ %f
+  set statusline+=%m\ 
+  set statusline+=%=
+  set statusline+=%#CursorColumn#
+  set statusline+=\ %y
+  set statusline+=\ %{&fileencoding?&fileencoding:&encoding}
+  set statusline+=\[%{&fileformat}\]
+  set statusline+=\ %p%%
+  set statusline+=\ %l:%c
+  set statusline+=\ 
+augroup END
 
 augroup FZF
   " :Files from fzf
@@ -307,12 +331,6 @@ augroup ALE
     \'ruby': ['rubocop'],
   \}
   let g:ale_sign_column_always = 1
-augroup END
-
-augroup VimAirline
-  let g:airline_theme='dark'
-  let g:airline_powerline_fonts = 1
-  let g:airline_theme='minimalist'
 augroup END
 
 let ruby_no_expensive = 1
