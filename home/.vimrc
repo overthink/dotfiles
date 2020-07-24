@@ -333,6 +333,7 @@ augroup ALE
   let g:ale_sign_column_always = 1
   au FileType javascriptreact nnoremap <buffer> <localleader>i :ALEHover<CR>
   au FileType javascriptreact nnoremap <buffer> gd :ALEGoToDefinition<CR>
+  au FileType javascriptreact nnoremap <buffer> gr :ALEFindReferences -relative<CR>
 augroup END
 
 let ruby_no_expensive = 1
