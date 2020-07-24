@@ -37,6 +37,7 @@ Plugin 'rodjek/vim-puppet'
 Plugin 'ajh17/VimCompletesMe'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'easymotion/vim-easymotion'
+Plugin 'maxmellon/vim-jsx-pretty'
 
 call vundle#end()                 " required
 filetype plugin indent on         " required
@@ -148,6 +149,12 @@ nnoremap <C-p> :bp<CR>
 " a mapping to refresh the syntax colouring easily -- this is really only
 " useful when writing syntax files.
 nnoremap <F12> :syn sync fromstart<CR>
+
+" open definitions in a split
+" (don't use `nore` variant; we want recursive mapping on these since they're
+" often mapped by other plugins)
+nmap <leader>gd :split<CR>gd
+nmap <leader>gD :split<CR>gD
 
 "##############################################################################
 " Easier split navigation
@@ -264,9 +271,9 @@ endif
 
 " like :grep, but open quickfix unconditionally and don't focus it (use
 " vim-unimparied to move between entries)
-command! -nargs=+ -bar MyGrep silent! grep! <args>|copen|exe 'wincmd p'|redraw!
+command! -nargs=+ -bar Grep silent! grep!  <args>|copen|wincmd p|redraw!
 " grep for word under cursor and open in quickfix (mnemonic: 'all files')
-nmap <leader>a :MyGrep <C-R><C-W><CR>
+nmap <leader>a :execute ":Grep '\\b" . expand("<cword>") . "\\b'"<CR>
 
 augroup rust
   au!
@@ -280,17 +287,25 @@ augroup END
 
 let g:github_enterprise_urls = ['https://git.corp.stripe.com']
 
+augroup JSX
+  let g:jsx_ext_required = 0
+augroup END
+
 augroup ALE
   nnoremap <leader>l :w<CR>:ALELint<CR>
   nnoremap <leader>L :ALEReset<CR>
-  let g:ale_lint_on_enter = 0
-  let g:ale_lint_on_text_changed = 0
-  let g:ale_pattern_options = {
-\ 'pay-server/.*\.rb$': { 'ale_ruby_rubocop_executable': 'scripts/bin/rubocop-daemon/rubocop' },
-\}
-  let g:ale_ruby_rubocop_executable = 'bundle'
-  let g:ale_fixers = {}
-  let g:ale_fixers['javascript'] = ['prettier', 'eslint']
+  let g:ale_ruby_rubocop_executable = 'scripts/bin/rubocop'
+  let g:ale_fix_on_save = 1
+  let g:ale_lint_on_save = 1
+  let g:ale_linters = {
+    \'javascript': ['prettier', 'eslint', 'flow-language-server'],
+    \'javascriptreact': ['prettier', 'eslint', 'flow-language-server'],
+  \}
+  let g:ale_fixers = {
+    \'javascript': ['prettier', 'eslint'],
+    \'javascriptreact': ['prettier', 'eslint'],
+    \'ruby': ['rubocop'],
+  \}
   let g:ale_sign_column_always = 1
 augroup END
 
