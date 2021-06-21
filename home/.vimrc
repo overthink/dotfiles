@@ -100,18 +100,8 @@ set signcolumn=yes        " always show the extra column on the left to avoid te
 set shortmess+=c          " don't add noisy status messages to completion popup
 
 augroup STATUSLINE
-  function! GitBranch()
-    return system("git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
-  endfunction
-
-  function! StatuslineGit()
-    let l:branchname = GitBranch()
-    return strlen(l:branchname) > 0?'  '.l:branchname.' ':''
-  endfunction
-
   set statusline=
   set statusline+=%#PmenuSel#
-  set statusline+=%{StatuslineGit()}
   set statusline+=%#LineNr#
   set statusline+=\ %f
   set statusline+=%m\ 
@@ -153,6 +143,9 @@ augroup FZF
 
   " override the :Rg that comes with fzf-vim
   command! -nargs=* -bang Rg call RipgrepFzf(<q-args>, <bang>0)
+
+  " remove the annoying :Windows command I always accidentally trigger
+  silent! delcommand Windows
 augroup END
 
 "##############################################################################
@@ -199,9 +192,9 @@ nnoremap <leader>o :only<CR>
 " open current split in new tab
 nnoremap <leader>t <C-W>T
 
-" jump between hunks (vimgutter)
-nnoremap ]h <Plug>(GitGutterNextHunk)
-nnoremap [h <Plug>(GitGutterPrevHunk)
+" jump between hunks (gitgutter)
+"nnoremap ]h <Plug>(GitGutterNextHunk)
+"nnoremap [h <Plug>(GitGutterPrevHunk)
 
 " Stuff stolen from vim-sensible: https://github.com/tpope/vim-sensible
 set viminfo^=!
@@ -318,7 +311,7 @@ augroup END
 augroup ALE
   nnoremap <leader>l :w<CR>:ALELint<CR>
   nnoremap <leader>L :ALEReset<CR>
-  let g:ale_ruby_rubocop_executable = 'scripts/bin/rubocop'
+  let g:ale_pattern_options_enabled = 1
   let g:ale_fix_on_save = 1
   let g:ale_lint_on_save = 1
   let g:ale_linters = {
@@ -328,15 +321,42 @@ augroup ALE
   let g:ale_fixers = {
     \'javascript': ['prettier', 'eslint'],
     \'javascriptreact': ['prettier', 'eslint'],
-    \'ruby': ['rubocop'],
   \}
+  "\'ruby': ['rubocop'],
   let g:ale_sign_column_always = 1
   au FileType javascriptreact nnoremap <buffer> <localleader>i :ALEHover<CR>
   au FileType javascriptreact nnoremap <buffer> gd :ALEGoToDefinition<CR>
   au FileType javascriptreact nnoremap <buffer> gr :ALEFindReferences -relative<CR>
 augroup END
 
+augroup ALE_stripe
+  let g:ale_pattern_options = {
+  \ 'pay-server/.*\.rb$': { 'ale_ruby_rubocop_executable': 'scripts/bin/rubocop-daemon/rubocop' },
+  \}
+  let g:ale_ruby_rubocop_executable = 'scripts/bin/rubocop'
+
+  call ale#linter#Define('ruby', {
+  \   'name': 'sorbet-payserver',
+  \   'lsp': 'stdio',
+  \   'executable': 'true',
+  \   'command': 'pay exec scripts/bin/typecheck --lsp',
+  \   'language': 'ruby',
+  \   'project_root': $HOME . '/stripe/pay-server',
+  \})
+
+  if !exists("g:ale_linters")
+      let g:ale_linters = {}
+  endif
+
+  if fnamemodify(getcwd(), ':p') == $HOME.'/stripe/pay-server/'
+    let g:ale_linters['ruby'] = ['sorbet-payserver']
+  end
+augroup END
+
 let ruby_no_expensive = 1
 
 "set clipboard= " TODO: if non-empty, breaks visual mode hilighting on mac... wtf!
 set clipboard=unnamed
+
+" remove the annoying :Windows command I always accidentally trigger
+silent! delcommand Windows
