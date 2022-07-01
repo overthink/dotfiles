@@ -1,6 +1,4 @@
 #!/bin/bash
-# Generate a .gitconfig and write it on stdout.
-
 
 echo -n "Enter name: "
 read name
