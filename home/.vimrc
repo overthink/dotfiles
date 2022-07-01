@@ -3,41 +3,37 @@ filetype off                      " required by Vundle
 
 set rtp+=/usr/local/opt/fzf
 
-" Use Vundle to manage plugins: https://github.com/gmarik/vundle
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()                "required
-" Vundle needs to manage itself
-Plugin 'VundleVim/Vundle.vim'
+call plug#begin('~/.vim/plugged')
 
-Plugin 'derekwyatt/vim-scala'
-Plugin 'plasticboy/vim-markdown'
-Plugin 'overthink/vim-matchit'
-Plugin 'tpope/vim-leiningen'
-Plugin 'tpope/vim-fireplace'
-Plugin 'overthink/vim-classpath'
-Plugin 'guns/vim-clojure-static'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-rhubarb'
-Plugin 'sickill/vim-monokai'
-Plugin 'tomasr/molokai'
-Plugin 'krisajenkins/vim-pipe'
-Plugin 'rust-lang/rust.vim'
-Plugin 'exu/pgsql.vim'
-Plugin 'junegunn/fzf'
-Plugin 'junegunn/fzf.vim'
-Plugin 'overthink/nginx-vim-syntax'
-Plugin 'dense-analysis/ale'
-Plugin 'tpope/vim-unimpaired'
-Plugin 'fatih/vim-go'
-Plugin 'jamessan/vim-gnupg'
-Plugin 'cespare/vim-toml'
-Plugin 'rodjek/vim-puppet'
-Plugin 'ajh17/VimCompletesMe'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'easymotion/vim-easymotion'
-Plugin 'maxmellon/vim-jsx-pretty'
+Plug 'derekwyatt/vim-scala'
+Plug 'plasticboy/vim-markdown'
+Plug 'overthink/vim-matchit'
+Plug 'tpope/vim-leiningen'
+Plug 'tpope/vim-fireplace'
+Plug 'overthink/vim-classpath'
+Plug 'guns/vim-clojure-static'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-rhubarb'
+Plug 'sickill/vim-monokai'
+Plug 'tomasr/molokai'
+Plug 'krisajenkins/vim-pipe'
+Plug 'rust-lang/rust.vim'
+Plug 'exu/pgsql.vim'
+Plug 'junegunn/fzf'
+Plug 'junegunn/fzf.vim'
+Plug 'overthink/nginx-vim-syntax'
+Plug 'dense-analysis/ale'
+Plug 'tpope/vim-unimpaired'
+Plug 'fatih/vim-go'
+Plug 'jamessan/vim-gnupg'
+Plug 'cespare/vim-toml'
+Plug 'rodjek/vim-puppet'
+Plug 'ajh17/VimCompletesMe'
+Plug 'airblade/vim-gitgutter'
+Plug 'easymotion/vim-easymotion'
+Plug 'maxmellon/vim-jsx-pretty'
 
-call vundle#end()                 " required
+call plug#end()                 " required
 filetype plugin indent on         " required
 
 set modeline                      " this is off in Ubuntu by default; f that
@@ -302,8 +298,6 @@ augroup conf
   au BufNewFile,BufRead *.conf setlocal ft=conf
 augroup END
 
-let g:github_enterprise_urls = ['https://git.corp.stripe.com']
-
 augroup JSX
   let g:jsx_ext_required = 0
 augroup END
@@ -327,30 +321,6 @@ augroup ALE
   au FileType javascriptreact nnoremap <buffer> <localleader>i :ALEHover<CR>
   au FileType javascriptreact nnoremap <buffer> gd :ALEGoToDefinition<CR>
   au FileType javascriptreact nnoremap <buffer> gr :ALEFindReferences -relative<CR>
-augroup END
-
-augroup ALE_stripe
-  let g:ale_pattern_options = {
-  \ 'pay-server/.*\.rb$': { 'ale_ruby_rubocop_executable': 'scripts/bin/rubocop-daemon/rubocop' },
-  \}
-  let g:ale_ruby_rubocop_executable = 'scripts/bin/rubocop'
-
-  call ale#linter#Define('ruby', {
-  \   'name': 'sorbet-payserver',
-  \   'lsp': 'stdio',
-  \   'executable': 'true',
-  \   'command': 'pay exec scripts/bin/typecheck --lsp',
-  \   'language': 'ruby',
-  \   'project_root': $HOME . '/stripe/pay-server',
-  \})
-
-  if !exists("g:ale_linters")
-      let g:ale_linters = {}
-  endif
-
-  if fnamemodify(getcwd(), ':p') == $HOME.'/stripe/pay-server/'
-    let g:ale_linters['ruby'] = ['sorbet-payserver']
-  end
 augroup END
 
 let ruby_no_expensive = 1
