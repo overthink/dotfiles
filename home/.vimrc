@@ -315,6 +315,7 @@ augroup ALE
   let g:ale_fixers = {
     \'javascript': ['prettier', 'eslint'],
     \'javascriptreact': ['prettier', 'eslint'],
+    \'python': ['black'],
   \}
   "\'ruby': ['rubocop'],
   let g:ale_sign_column_always = 1
