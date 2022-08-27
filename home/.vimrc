@@ -3,7 +3,7 @@ filetype off                      " required by Vundle
 
 set rtp+=/usr/local/opt/fzf
 
-call plug#begin('~/.vim/plugged')
+call plug#begin()
 
 Plug 'derekwyatt/vim-scala'
 Plug 'plasticboy/vim-markdown'
@@ -13,7 +13,6 @@ Plug 'tpope/vim-fireplace'
 Plug 'overthink/vim-classpath'
 Plug 'guns/vim-clojure-static'
 Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-rhubarb'
 Plug 'sickill/vim-monokai'
 Plug 'tomasr/molokai'
 Plug 'krisajenkins/vim-pipe'
@@ -32,8 +31,12 @@ Plug 'ajh17/VimCompletesMe'
 Plug 'airblade/vim-gitgutter'
 Plug 'easymotion/vim-easymotion'
 Plug 'maxmellon/vim-jsx-pretty'
+Plug 'pangloss/vim-javascript'
+Plug 'leafgarland/typescript-vim'
+Plug 'peitalin/vim-jsx-typescript'
 
-call plug#end()                 " required
+call plug#end()
+
 filetype plugin indent on         " required
 
 set modeline                      " this is off in Ubuntu by default; f that
@@ -308,14 +311,11 @@ augroup ALE
   let g:ale_pattern_options_enabled = 1
   let g:ale_fix_on_save = 1
   let g:ale_lint_on_save = 1
-  let g:ale_linters = {
-    \'javascript': ['prettier', 'eslint', 'flow-language-server'],
-    \'javascriptreact': ['prettier', 'eslint', 'flow-language-server'],
-  \}
   let g:ale_fixers = {
-    \'javascript': ['prettier', 'eslint'],
-    \'javascriptreact': ['prettier', 'eslint'],
     \'python': ['black'],
+    \'typescriptreact': ['prettier'],
+    \'javascript': ['prettier'],
+    \'css': ['prettier'],
   \}
   "\'ruby': ['rubocop'],
   let g:ale_sign_column_always = 1
