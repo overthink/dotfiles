@@ -48,10 +48,6 @@ add_path() {
 
 add_path ~/bin
 add_path ~/go/bin
-add_path ~/.cargo/bin
-add_path ~/nim-0.17.2/bin
-add_path ~/.nimble/bin
-add_path ~/.cabal/bin
 
 export EDITOR="vim"
 
