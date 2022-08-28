@@ -29,11 +29,9 @@ Plug 'cespare/vim-toml'
 Plug 'rodjek/vim-puppet'
 Plug 'ajh17/VimCompletesMe'
 Plug 'airblade/vim-gitgutter'
-Plug 'easymotion/vim-easymotion'
 Plug 'maxmellon/vim-jsx-pretty'
 Plug 'pangloss/vim-javascript'
 Plug 'leafgarland/typescript-vim'
-Plug 'peitalin/vim-jsx-typescript'
 
 call plug#end()
 
