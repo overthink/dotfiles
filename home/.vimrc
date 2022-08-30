@@ -32,6 +32,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'maxmellon/vim-jsx-pretty'
 Plug 'pangloss/vim-javascript'
 Plug 'leafgarland/typescript-vim'
+Plug 'hashivim/vim-terraform'
 
 call plug#end()
 
