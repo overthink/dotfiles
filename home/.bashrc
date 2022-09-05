@@ -7,6 +7,9 @@
 
 set -o vi
 
+# save history after every command: http://northernmost.org/blog/flush-bash_history-after-each-command/
+export PROMPT_COMMAND='history -a; history -r'
+
 if [[ $TERM == @(screen|tmux|xterm) ]]; then
   TERM="$TERM-256color"
 fi
