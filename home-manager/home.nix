@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   home.username = "mark";
@@ -9,25 +9,24 @@
     age
     coreutils
     curl
+    direnv
     docker
-    fzf
     gawk
-    git
     gnupg
     gnused
+    go
     htop
     jq
+    k9s
+    kubectl
+    openssh
+    python3
     ripgrep
     shellcheck
-    openssh
     sops
-    tmux
     tree
-    vim
     wget
     yq-go
-    go
-    python3
   ];
 
   home.shellAliases = {
@@ -45,6 +44,10 @@
   programs.bash = {
     enable = true;
     enableCompletion = true;
+    initExtra = ''
+      source ~/.nix-profile/share/git/contrib/completion/git-prompt.sh
+      export PS1='\w $(__git_ps1 "(%s) ")$ '
+    '';
   };
 
   programs.fzf = {
@@ -96,6 +99,42 @@
     '';
   };
 
+  home.activation.createVimTempDirs = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    mkdir -p $HOME/.local/share/vim/{backup,swap,undo}
+  '';
+
+  programs.vim = {
+    enable = true;
+    defaultEditor = true;
+
+    settings = {
+      backupdir = [
+        "~/.local/share/vim/backup"
+      ];
+      undodir = [
+        "~/.local/share/vim/undo"
+      ];
+    };
+
+    plugins = with pkgs.vimPlugins; [
+      ale
+      fzf-vim
+      molokai
+      typescript-vim
+      vim-fugitive
+      vim-gitgutter
+      vim-gnupg
+      vim-go
+      vim-javascript
+      vim-jsx-pretty
+      vim-jsx-typescript
+      vim-markdown
+      vim-unimpaired
+    ];
+
+    extraConfig = builtins.readFile ./modules/vim/.vimrc;
+  };
+
   home.file = {
     ".ssh/allowed_signers".text = ''
       * ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAPRxjeY5t5aG4lzGTmjXbsONZ+pnmzHGUfsaMHDbECO mark.feeney@gmail.com
@@ -103,7 +142,7 @@
   };
 
   home.sessionVariables = {
-    EDITOR = "vim";
+    # EDITOR = "vim";
   };
 
   # Let Home Manager install and manage itself.
