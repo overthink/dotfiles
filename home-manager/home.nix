@@ -22,10 +22,12 @@
       gnupg
       gnused
       go
+      gopls
       htop
       jq
       k9s
       kubectl
+      nil
       nixfmt-rfc-style
       openssh
       python3
@@ -66,6 +68,7 @@
     atuin = {
       enable = true;
       enableBashIntegration = true;
+      flags = [ "--disable-up-arrow" ];
       settings = {
         inline_height = 30;
       };
@@ -149,7 +152,6 @@
         ale
         fzf-vim
         molokai
-        statix
         typescript-vim
         vim-autoformat
         vim-fugitive

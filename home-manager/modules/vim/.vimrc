@@ -181,7 +181,6 @@ au Filetype python setlocal ts=4 sw=4 sts=4 tw=79
 au Filetype scala setlocal foldmethod=indent tw=80 formatoptions+=l
 
 au Filetype markdown setlocal foldlevel=100
-au FileType markdown let b:vimpipe_command="multimarkdown | lynx -dump -stdin"
 
 " Run a command on the current file and put result in a new buffer in a new
 " split:
@@ -255,20 +254,18 @@ augroup END
 augroup ALE
   nnoremap <leader>l :w<CR>:ALELint<CR>
   nnoremap <leader>L :ALEReset<CR>
+  let g:ale_completion_enabled = 1
   let g:ale_pattern_options_enabled = 1
   let g:ale_fix_on_save = 1
   let g:ale_lint_on_save = 1
   let g:ale_fixers = {
     \'python': ['black'],
-    \'typescriptreact': ['prettier'],
-    \'javascript': ['prettier'],
-    \'css': ['prettier'],
+    \'nix': ['nixfmt'],
   \}
-  "\'ruby': ['rubocop'],
   let g:ale_sign_column_always = 1
-  au FileType javascriptreact nnoremap <buffer> <localleader>i :ALEHover<CR>
-  au FileType javascriptreact nnoremap <buffer> gd :ALEGoToDefinition<CR>
-  au FileType javascriptreact nnoremap <buffer> gr :ALEFindReferences -relative<CR>
+  "au FileType javascriptreact nnoremap <buffer> <localleader>i :ALEHover<CR>
+  "au FileType javascriptreact nnoremap <buffer> gd :ALEGoToDefinition<CR>
+  "au FileType javascriptreact nnoremap <buffer> gr :ALEFindReferences -relative<CR>
 augroup END
 
 "set clipboard= " TODO: if non-empty, breaks visual mode hilighting on mac... wtf!
