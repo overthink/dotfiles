@@ -27,11 +27,21 @@
     tree
     wget
     yq-go
+    sqlite
+    duckdb
   ];
 
   home.shellAliases = {
     ls = "ls --color=auto";
     ll = "ls -laF";
+  };
+
+  programs.atuin = {
+    enable = true;
+    enableBashIntegration = true;
+    settings = {
+      inline_height = 30;
+    };
   };
 
   programs.readline = {
