@@ -12,33 +12,29 @@
     stateVersion = "23.11";
 
     packages = with pkgs; [
-      age
       coreutils
       curl
-      direnv
       docker
       duckdb
       gawk
+      gnumake
       gnupg
       gnused
-      go
-      gopls
       htop
       jq
       k9s
       kubectl
-      nil
-      nixfmt-rfc-style
-      openssh
-      python3
-      ripgrep
       shellcheck
       sops
       sqlite
-      statix
       tree
       wget
       yq-go
+
+      # nix editing
+      nil
+      nixfmt-rfc-style
+      statix
     ];
 
     shellAliases = {
@@ -88,6 +84,10 @@
         source ~/.nix-profile/share/git/contrib/completion/git-prompt.sh
         export PS1='\w $(__git_ps1 "(%s) ")$ '
       '';
+    };
+
+    ripgrep = {
+      enable = true;
     };
 
     fzf = {
@@ -166,6 +166,15 @@
       ];
 
       extraConfig = builtins.readFile ./modules/vim/.vimrc;
+    };
+
+    ssh = {
+      enable = true;
+    };
+
+    direnv = {
+      enable = true;
+      enableBashIntegration = true;
     };
   };
 }
