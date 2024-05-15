@@ -8,7 +8,6 @@
 {
   home = {
     username = "mark";
-    homeDirectory = "/home/mark";
     stateVersion = "23.11";
 
     packages = with pkgs; [
@@ -165,7 +164,7 @@
         vim-unimpaired
       ];
 
-      extraConfig = builtins.readFile ./modules/vim/.vimrc;
+      extraConfig = builtins.readFile ../modules/vim/.vimrc;
     };
 
     ssh = {
