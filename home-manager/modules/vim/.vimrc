@@ -18,7 +18,7 @@ set autoindent
 set history=1000                  " keep lots of history of commands
 set expandtab                     " spaces, not tabs
 syntax enable                     " use syntax hilighting
-colorscheme molokai
+colorscheme lunaperche
 set ruler                  " always show cursor location in file
 set showcmd                " show partially typed commands
 set incsearch              " do incremental searching
@@ -268,8 +268,8 @@ augroup ALE
   "au FileType javascriptreact nnoremap <buffer> gr :ALEFindReferences -relative<CR>
 augroup END
 
-"set clipboard= " TODO: if non-empty, breaks visual mode hilighting on mac... wtf!
-set clipboard=unnamed
+"set clipboard=unnamed " TODO: if non-empty, may break visual mode hilighting on mac... wtf!
+set clipboard=
 
 " remove the annoying :Windows command I always accidentally trigger
 silent! delcommand Windows

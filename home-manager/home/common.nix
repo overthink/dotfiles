@@ -15,6 +15,7 @@
       curl
       docker
       duckdb
+      devbox
       gawk
       gnumake
       gnupg
@@ -118,6 +119,7 @@
         gpg.format = "ssh";
         gpg.ssh.allowedSignersFile = "~/.ssh/allowed_signers";
         user.signingkey = "~/.ssh/id_ed25519.pub";
+        init.defaultBranch = "main";
       };
     };
 
@@ -150,7 +152,6 @@
       plugins = with pkgs.vimPlugins; [
         ale
         fzf-vim
-        molokai
         typescript-vim
         vim-autoformat
         vim-fugitive
