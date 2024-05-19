@@ -1,7 +1,8 @@
 { pkgs, ... }:
 {
-  home.homeDirectory = "/Users/mark";
-  home.packages = with pkgs; [
-    google-cloud-sdk
-  ];
+  home = {
+    homeDirectory = "/Users/mark";
+    sessionPath = [ "/Applications/Visual Studio Code.app/Contents/Resources/app/bin" ];
+    packages = with pkgs; [ google-cloud-sdk ];
+  };
 }
