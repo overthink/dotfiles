@@ -13,9 +13,9 @@
     packages = with pkgs; [
       coreutils
       curl
+      devbox
       docker
       duckdb
-      devbox
       gawk
       gnumake
       gnupg
@@ -24,6 +24,7 @@
       jq
       k9s
       kubectl
+      mtr
       shellcheck
       sops
       sqlite
@@ -110,6 +111,10 @@
       };
       delta = {
         enable = true;
+        options = {
+          navigate = true;
+          line-numbers = true;
+        };
       };
       ignores = [
         ".netrwhist"
@@ -118,10 +123,15 @@
       extraConfig = {
         # Sign all commits using ssh key
         commit.gpgsign = true;
+        diff.colorMoved = "default";
         gpg.format = "ssh";
         gpg.ssh.allowedSignersFile = "~/.ssh/allowed_signers";
         user.signingkey = "~/.ssh/id_ed25519.pub";
         init.defaultBranch = "main";
+        merge.conflictStyle = "diff3";
+        push = {
+          autoSetupRemote = true;
+        };
       };
     };
 
