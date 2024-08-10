@@ -10,22 +10,32 @@
     };
   };
 
-  outputs = { nixpkgs, home-manager, ... }: {
-    homeConfigurations = {
-      "mark@Marks-MacBook-Pro.local" = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.aarch64-darwin;
-        modules = [
-          ./home/macbook.nix
-          ./home/common.nix
-        ];
-      };
-      "mark@rumfoord" = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.x86_64-linux;
-        modules = [
-          ./home/rumfoord.nix
-          ./home/common.nix
-        ];
+  outputs =
+    { nixpkgs, home-manager, ... }:
+    {
+      homeConfigurations = {
+        "mark@Marks-MBP" = home-manager.lib.homeManagerConfiguration {
+          # pkgs = nixpkgs.legacyPackages.aarch64-darwin;
+          pkgs = import nixpkgs {
+            system = "aarch64-darwin";
+            config.allowUnfree = true;
+          };
+          modules = [
+            ./home/macbook.nix
+            ./home/common.nix
+          ];
+        };
+        "mark@rumfoord" = home-manager.lib.homeManagerConfiguration {
+          # pkgs = nixpkgs.legacyPackages.x86_64-linux;
+          pkgs = import nixpkgs {
+            system = "x86_64-linux";
+            config.allowUnfree = true;
+          };
+          modules = [
+            ./home/rumfoord.nix
+            ./home/common.nix
+          ];
+        };
       };
     };
-  };
 }
