@@ -53,6 +53,12 @@
       '';
     };
 
+    file = {
+      ".psqlrc".text = ''
+        \pset pager off
+      '';
+    };
+
     sessionPath = [ "$HOME/bin" ];
 
     sessionVariables = {

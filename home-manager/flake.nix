@@ -14,7 +14,8 @@
     { nixpkgs, home-manager, ... }:
     {
       homeConfigurations = {
-        "mark@Marks-MBP" = home-manager.lib.homeManagerConfiguration {
+        # "mark@Marks-MBP" = home-manager.lib.homeManagerConfiguration {
+        "mark@Marks-MacBook-Pro.local" = home-manager.lib.homeManagerConfiguration {
           # pkgs = nixpkgs.legacyPackages.aarch64-darwin;
           pkgs = import nixpkgs {
             system = "aarch64-darwin";
