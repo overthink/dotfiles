@@ -159,6 +159,7 @@
     };
 
     vim = {
+      packageConfigurable = pkgs.vim-darwin; # TODO: this is going to break my linux setup, fix later
       enable = true;
       defaultEditor = true;
 

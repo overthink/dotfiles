@@ -269,7 +269,7 @@ augroup ALE
 augroup END
 
 "set clipboard=unnamed " TODO: if non-empty, may break visual mode hilighting on mac... wtf!
-set clipboard=
+set clipboard=unnamed
 
 " remove the annoying :Windows command I always accidentally trigger
 silent! delcommand Windows
