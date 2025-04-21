@@ -13,9 +13,12 @@
     packages = with pkgs; [
       coreutils
       curl
-      devbox
+      #devbox
       docker
       duckdb
+      entr
+      fd
+      fswatch
       gawk
       gnumake
       gnupg
@@ -56,6 +59,7 @@
     file = {
       ".psqlrc".text = ''
         \pset pager off
+        \timing on
       '';
     };
 
