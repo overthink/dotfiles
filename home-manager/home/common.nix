@@ -13,7 +13,7 @@
     packages = with pkgs; [
       coreutils
       curl
-      #devbox
+      devbox
       docker
       duckdb
       entr
