@@ -25,8 +25,6 @@
       htop
       jq
       mtr
-      nodejs
-      pnpm
       shellcheck
       tree
       wget
