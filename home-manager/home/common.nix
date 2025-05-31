@@ -8,12 +8,11 @@
 {
   home = {
     username = "mark";
-    stateVersion = "23.11";
+    stateVersion = "25.05";
 
     packages = with pkgs; [
       coreutils
       curl
-      devbox
       docker
       duckdb
       entr
@@ -25,12 +24,10 @@
       gnused
       htop
       jq
-      k9s
-      kubectl
       mtr
+      nodejs
+      pnpm
       shellcheck
-      sops
-      sqlite
       tree
       wget
       yq-go
