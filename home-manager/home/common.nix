@@ -13,6 +13,7 @@
     packages = with pkgs; [
       coreutils
       curl
+      d2
       docker
       duckdb
       entr
@@ -23,7 +24,9 @@
       gnupg
       gnused
       htop
+      imagemagick
       jq
+      moreutils
       mtr
       shellcheck
       tree
